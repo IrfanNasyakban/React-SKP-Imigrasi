@@ -1,0 +1,28 @@
+* {
+	margin: 0px; 
+	padding: 0px; 
+	box-sizing: border-box;
+}
+
+.colors {
+    color: rgb(78, 156, 223);
+  }
+  
+  .table-bordered {
+    border: 1px solid rgb(0, 0, 0);
+  }
+  
+  .section-padding {
+    margin-bottom: 200px;
+  }
+  
+  .custom-card {
+    margin: -60px; /* Sesuaikan nilai margin sesuai kebutuhan Anda */
+  }
+  
+  .min-height-content {
+    min-height: calc(
+      90vh - 110px
+    ); /* Sesuaikan nilai dengan tinggi footer dan konten lainnya */
+  }
+  

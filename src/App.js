@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable react/jsx-no-target-blank */
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ListData from './components/ListData';
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+import FormIdentitas from './components/FormIdentitas';
+import FormRHKIntervensi from './components/FormRHKIntervensi';
+import FormRHK from './components/FormRHK';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={(
+          <>
+            <Navbar/>
+            <ListData/>
+          </>
+        )} />
+        <Route path="/form-identitas" element={(
+          <>
+            <Navbar/>
+            <FormIdentitas/>
+            <Footer/>
+          </>
+        )} />
+        <Route path="/form-rhk-intervensi" element={(
+          <>
+            <Navbar/>
+            <FormRHKIntervensi/>
+            <Footer/>
+          </>
+        )} />
+        <Route path="/form-rhk" element={(
+          <>
+            <Navbar/>
+            <FormRHK/>
+            <Footer/>
+          </>
+        )} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
