@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css";
 import "../resources/fonts/Linearicons-Free-v1.0.0/icon-font.min.css";
@@ -7,6 +9,23 @@ import "../resources/css/util.css";
 import "../resources/css/main.css";
 
 const FormRHKIntervensi = () => {
+  const [idIdentitas, setIdIdentitas] = useState();
+  const { id } = useParams();
+
+  useEffect(() => {
+    getIdentitasById();
+  },);
+
+  const getIdentitasById = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/identitas/${id}`);
+      setIdIdentitas(response.data.idIdentitas);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      // Handle error here
+    }
+  };
+
   return (
     <div className="limiter">
       <div
@@ -27,8 +46,9 @@ const FormRHKIntervensi = () => {
               <input
                 className="input100"
                 type="text"
-                name="username"
+                name="idIdentitas"
                 readOnly
+                value={idIdentitas || ""}
               />
               <span className="focus-input100"></span>
             </div>

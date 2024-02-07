@@ -26,7 +26,7 @@ function App() {
             <Footer/>
           </>
         )} />
-        <Route path="/form-rhk-intervensi" element={(
+        <Route path="/form-rhk-intervensi/:id" element={(
           <>
             <Navbar/>
             <FormRHKIntervensi/>
