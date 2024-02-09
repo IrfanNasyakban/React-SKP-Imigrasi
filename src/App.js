@@ -33,7 +33,7 @@ function App() {
             <Footer/>
           </>
         )} />
-        <Route path="/form-rhk" element={(
+        <Route path="/form-rhk/:id" element={(
           <>
             <Navbar/>
             <FormRHK/>
