@@ -24,7 +24,7 @@ function Navbar() {
         {/* <!-- Collapsible wrapper --> */}
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           {/* <!-- Navbar brand --> */}
-          <a className="navbar-brand mt-2 mt-lg-0" href="/data">
+          <a className="navbar-brand mt-2 mt-lg-0" href="/">
             <img
               src={Logo}
               height="55"
@@ -32,17 +32,27 @@ function Navbar() {
               loading="lazy"
             />
           </a>
+          {/* <!-- Left links --> */}
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link text-putih" href="/">
+                Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-putih" href="/form-identitas">
+                Buat SKP
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-putih" href="/search">
+                Cari Data SKP
+              </a>
+            </li>
+          </ul>
+          {/* <!-- Left links --> */}
         </div>
         {/* <!-- Collapsible wrapper --> */}
-
-        {/* <!-- Right elements --> */}
-        <div className="d-flex align-items-center">
-          {/* <!-- Icon --> */}
-          <a className="link-secondary me-3" href="#s">
-            <i className="fas fa-shopping-cart"></i>
-          </a>
-        </div>
-        {/* <!-- Right elements --> */}
       </div>
       {/* <!-- Container wrapper --> */}
     </nav>

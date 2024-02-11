@@ -7,6 +7,8 @@ import Footer from './components/Footer'
 import FormIdentitas from './components/FormIdentitas';
 import FormRHKIntervensi from './components/FormRHKIntervensi';
 import FormRHK from './components/FormRHK';
+import Dashboard from './components/Dashboard';
+import SearchData from './components/SearchData';
 
 function App() {
 
@@ -16,7 +18,13 @@ function App() {
         <Route path="/" element={(
           <>
             <Navbar/>
-            <ListData/>
+            <Dashboard/>
+          </>
+        )} />
+        <Route path="/search" element={(
+          <>
+            <Navbar/>
+            <SearchData/>
           </>
         )} />
         <Route path="/form-identitas" element={(
@@ -38,6 +46,12 @@ function App() {
             <Navbar/>
             <FormRHK/>
             <Footer/>
+          </>
+        )} />
+        <Route path="/list/:id" element={(
+          <>
+            <Navbar/>
+            <ListData/>
           </>
         )} />
       </Routes>

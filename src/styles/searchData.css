@@ -1,0 +1,14 @@
+.container-table {
+  display: flex;
+  justify-content: center;
+}
+
+.table-kedua {
+  max-width: 700px; /* Sesuaikan sesuai kebutuhan */
+  font-size: 14px; /* Ukuran font lebih kecil */
+}
+
+.table-kedua th,
+.table-kedua td {
+  text-align: center;
+}

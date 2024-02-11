@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
+import { Button, Modal } from "react-bootstrap";
 import axios from "axios";
 
 const FormRHK = () => {
@@ -10,7 +10,19 @@ const FormRHK = () => {
   const [kualitas, setKualitas] = useState();
   const [waktu, setWaktu] = useState();
   const { id } = useParams();
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
+
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
+  const handleYes = () => {
+    window.location.reload(); // Refresh the page
+  };
+
+  const handleNo = () => {
+    navigate("/"); // Refresh the page
+  };
 
   useEffect(() => {
     getIntervensiById();
@@ -21,7 +33,8 @@ const FormRHK = () => {
       const response = await axios.get(
         `http://localhost:5000/intervensi/${id}`
       );
-      setidIntervensi(response.data.idIdentitas);
+      console.log(response.data.idIntervensi);
+      setidIntervensi(response.data.idIntervensi);
     } catch (error) {
       console.error("Error fetching data:", error);
       // Handle error here
@@ -68,7 +81,10 @@ const FormRHK = () => {
         style={{ backgroundImage: "url('images/bg-01.jpg')" }}
       >
         <div className="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
-          <form className="login100-form validate-form flex-sb flex-w">
+          <form
+            className="login100-form validate-form flex-sb flex-w"
+            onSubmit={saveRhk}
+          >
             <span className="login100-form-title p-b-53">SKP</span>
 
             <div className="p-t-31 p-b-9">
@@ -171,11 +187,35 @@ const FormRHK = () => {
             </div>
 
             <div className="container-login100-form-btn m-t-17">
-              <button className="login100-form-btn">Next</button>
+              <Button
+                className="login100-form-btn"
+                variant="primary"
+                onClick={handleShow}
+              >
+                Next
+              </Button>
             </div>
           </form>
         </div>
       </div>
+
+      <Modal show={showModal} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Tersimpan</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Apakah anda ingin menambahkan Rencana Hasil Kerja lagi?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="success" onClick={handleYes}>
+            Iya
+          </Button>
+          <Button variant="primary" onClick={handleNo}>
+            Tidak
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
     </div>
   );
 };
