@@ -41,7 +41,7 @@ function ListAllData() {
 
   const getIdentitasById = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/identitas/${id}`);
+      const response = await axios.get(`https://api-imigrasi.sucofindo-arsip.my.id/identitas/${id}`);
       const {
         namaPegawai,
         nipPegawai,
@@ -150,32 +150,6 @@ function ListAllData() {
             <div className="table-responsive text-center">
               <table id="table-id" className="table colors">
                 <thead>
-                  <tr>
-                    <th colSpan={9} style={{ verticalAlign: "middle" }}>
-                      SASARAN KINERJA PEGAWAI
-                    </th>
-                  </tr>
-                  <tr>
-                    <th colSpan={9} style={{ verticalAlign: "middle" }}>
-                      PENDEKATAN HASIL KERJA KUANTITATIF
-                    </th>
-                  </tr>
-                  <tr>
-                    <th colSpan={9} style={{ verticalAlign: "middle" }}>
-                      BAGI PEJABAT ADMINISTRASI DAN PEJABAT FUNGSIONAL
-                    </th>
-                  </tr>
-                  <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                  </tr>
                   <tr style={{ borderBottom: "1px solid black"}}>
                     <th style={{ flex: 1, textAlign: "left" }} colSpan={4}>RUTAN KELAS IIB SABANG</th>
                     <th style={{ textAlign: "right" }} colSpan={2}>PERIODE PENILAIAN:</th>
@@ -278,7 +252,7 @@ function ListAllData() {
 
                         <tr>
                           <td className="table-bordered" rowSpan={3}>2</td>
-                          <td className="table-bordered" rowSpan={3} style={{ flex: 1, textAlign: "left" }}>{rhkIntervensi}</td>
+                          <td className="table-bordered" rowSpan={3} style={{ flex: 1, textAlign: "left" }}></td>
                           <td className="table-bordered" rowSpan={3} colSpan={3} style={{ flex: 1, textAlign: "left" }}>{rhk[1]}</td>
                           <td className="table-bordered">Kuantitas</td>
                           <td className="table-bordered" colSpan={2}>Jumlah pelaksanaan kegiatan dalam satu tahun</td>
@@ -297,7 +271,7 @@ function ListAllData() {
 
                         <tr>
                           <td className="table-bordered" rowSpan={3}>3</td>
-                          <td className="table-bordered" rowSpan={3} style={{ flex: 1, textAlign: "left" }}>{rhkIntervensi}</td>
+                          <td className="table-bordered" rowSpan={3} style={{ flex: 1, textAlign: "left" }}></td>
                           <td className="table-bordered" rowSpan={3} colSpan={3} style={{ flex: 1, textAlign: "left" }}>{rhk[2]}</td>
                           <td className="table-bordered">Kuantitas</td>
                           <td className="table-bordered" colSpan={2}>Jumlah pelaksanaan kegiatan dalam satu tahun</td>
@@ -316,7 +290,7 @@ function ListAllData() {
 
                         <tr>
                           <td className="table-bordered" rowSpan={3}>4</td>
-                          <td className="table-bordered" rowSpan={3} style={{ flex: 1, textAlign: "left" }}>{rhkIntervensi}</td>
+                          <td className="table-bordered" rowSpan={3} style={{ flex: 1, textAlign: "left" }}>{rhkIntervensi[1]}</td>
                           <td className="table-bordered" rowSpan={3} colSpan={3} style={{ flex: 1, textAlign: "left" }}>{rhk[3]}</td>
                           <td className="table-bordered">Kuantitas</td>
                           <td className="table-bordered" colSpan={2}>Jumlah pelaksanaan kegiatan dalam satu tahun</td>
@@ -335,7 +309,7 @@ function ListAllData() {
 
                         <tr>
                           <td className="table-bordered" rowSpan={3}>5</td>
-                          <td className="table-bordered" rowSpan={3} style={{ flex: 1, textAlign: "left" }}>{rhkIntervensi}</td>
+                          <td className="table-bordered" rowSpan={3} style={{ flex: 1, textAlign: "left" }}></td>
                           <td className="table-bordered" rowSpan={3} colSpan={3} style={{ flex: 1, textAlign: "left" }}>{rhk[4]}</td>
                           <td className="table-bordered">Kuantitas</td>
                           <td className="table-bordered" colSpan={2}>Jumlah pelaksanaan kegiatan dalam satu tahun</td>
@@ -351,6 +325,64 @@ function ListAllData() {
                           <td className="table-bordered" colSpan={2}>Ketetapan Waktu Penyelesaian kegiatan</td>
                           <td className="table-bordered">{waktu[4]}</td>
                         </tr>
+
+                        <tr>
+                          <td className="table-bordered" rowSpan={3}>6</td>
+                          <td className="table-bordered" rowSpan={3} style={{ flex: 1, textAlign: "left" }}></td>
+                          <td className="table-bordered" rowSpan={3} colSpan={3} style={{ flex: 1, textAlign: "left" }}>{rhk[5]}</td>
+                          <td className="table-bordered">Kuantitas</td>
+                          <td className="table-bordered" colSpan={2}>Jumlah pelaksanaan kegiatan dalam satu tahun</td>
+                          <td className="table-bordered">{kuantitas[5]}</td>
+                        </tr>
+                        <tr>
+                          <td className="table-bordered">Kualitas</td>
+                          <td className="table-bordered" colSpan={2}>Tingkat kesesuaian dengan pelaksanaan kegiatan</td>
+                          <td className="table-bordered">{kualitas[5]}</td>
+                        </tr>
+                        <tr>
+                          <td className="table-bordered">Waktu</td>
+                          <td className="table-bordered" colSpan={2}>Ketetapan Waktu Penyelesaian kegiatan</td>
+                          <td className="table-bordered">{waktu[5]}</td>
+                        </tr>
+
+                        <tr>
+                          <td className="table-bordered" rowSpan={3}>6</td>
+                          <td className="table-bordered" rowSpan={3} style={{ flex: 1, textAlign: "left" }}></td>
+                          <td className="table-bordered" rowSpan={3} colSpan={3} style={{ flex: 1, textAlign: "left" }}>{rhk[6]}</td>
+                          <td className="table-bordered">Kuantitas</td>
+                          <td className="table-bordered" colSpan={2}>Jumlah pelaksanaan kegiatan dalam satu tahun</td>
+                          <td className="table-bordered">{kuantitas[6]}</td>
+                        </tr>
+                        <tr>
+                          <td className="table-bordered">Kualitas</td>
+                          <td className="table-bordered" colSpan={2}>Tingkat kesesuaian dengan pelaksanaan kegiatan</td>
+                          <td className="table-bordered">{kualitas[6]}</td>
+                        </tr>
+                        <tr>
+                          <td className="table-bordered">Waktu</td>
+                          <td className="table-bordered" colSpan={2}>Ketetapan Waktu Penyelesaian kegiatan</td>
+                          <td className="table-bordered">{waktu[6]}</td>
+                        </tr>
+                        
+                        <tr>
+                          <td className="table-bordered" rowSpan={3}>6</td>
+                          <td className="table-bordered" rowSpan={3} style={{ flex: 1, textAlign: "left" }}></td>
+                          <td className="table-bordered" rowSpan={3} colSpan={3} style={{ flex: 1, textAlign: "left" }}>{rhk[7]}</td>
+                          <td className="table-bordered">Kuantitas</td>
+                          <td className="table-bordered" colSpan={2}>Jumlah pelaksanaan kegiatan dalam satu tahun</td>
+                          <td className="table-bordered">{kuantitas[7]}</td>
+                        </tr>
+                        <tr>
+                          <td className="table-bordered">Kualitas</td>
+                          <td className="table-bordered" colSpan={2}>Tingkat kesesuaian dengan pelaksanaan kegiatan</td>
+                          <td className="table-bordered">{kualitas[7]}</td>
+                        </tr>
+                        <tr>
+                          <td className="table-bordered">Waktu</td>
+                          <td className="table-bordered" colSpan={2}>Ketetapan Waktu Penyelesaian kegiatan</td>
+                          <td className="table-bordered">{waktu[7]}</td>
+                        </tr>
+
                     <tr>
                       <th className="table-bordered" colSpan={9} style={{ flex: 1, textAlign: "left" }}>B. TAMBAHAN</th>
                     </tr>
@@ -498,88 +530,6 @@ function ListAllData() {
                     <tr>
                       <td className="table-bordered" colSpan={3} style={{ flex: 1, textAlign: "left" }}>- Menggerakkan pemanfaatan berbagai sumberdaya untuk tujuan bersama</td>
                       <td className="table-bordered" colSpan={5} style={{ flex: 1, textAlign: "left" }}></td>
-                    </tr>
-
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td colSpan={3}>Banda Aceh, 3 Januari 2022</td>
-                    </tr>
-
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td>Pegawai Yang Dinilai</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td colSpan={3}>Pejabat Penilai Kinerja</td>
-                    </tr>
-
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td colSpan={3}></td>
-                    </tr>
-
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td colSpan={3}></td>
-                    </tr>
-
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td colSpan={3}></td>
-                    </tr>
-
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td>{namaPegawai}</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td colSpan={3}>{namaPejabat}</td>
-                    </tr>
-
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td>{nipPegawai}</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td colSpan={3}>{nipPejabat}</td>
                     </tr>
 
                   </tbody>

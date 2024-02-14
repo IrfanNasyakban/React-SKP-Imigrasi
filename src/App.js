@@ -9,6 +9,12 @@ import FormRHKIntervensi from './components/FormRHKIntervensi';
 import FormRHK from './components/FormRHK';
 import Dashboard from './components/Dashboard';
 import SearchData from './components/SearchData';
+import FormPrilakuKerja from './components/FormPrilakuKerja';
+import EditPage from './components/EditPage';
+import EditIdentitas from './components/EditIdentitas';
+import EditRHKIntervensi from './components/EditRHKIntervensi';
+import EditRHK from './components/EditRHK';
+import EditPrilakuKerja from './components/EditPrilakuKerja';
 
 function App() {
 
@@ -25,6 +31,41 @@ function App() {
           <>
             <Navbar/>
             <SearchData/>
+          </>
+        )} />
+        <Route path="/edit/:id" element={(
+          <>
+            <Navbar/>
+            <EditPage/>
+            <Footer/>
+          </>
+        )} />
+        <Route path="/edit/identitas/:id" element={(
+          <>
+            <Navbar/>
+            <EditIdentitas/>
+            <Footer/>
+          </>
+        )} />
+        <Route path="/edit/intervensi/:id" element={(
+          <>
+            <Navbar/>
+            <EditRHKIntervensi/>
+            <Footer/>
+          </>
+        )} />
+        <Route path="/edit/rhk/:id" element={(
+          <>
+            <Navbar/>
+            <EditRHK/>
+            <Footer/>
+          </>
+        )} />
+        <Route path="/edit/prilaku-kerja/:id" element={(
+          <>
+            <Navbar/>
+            <EditPrilakuKerja/>
+            <Footer/>
           </>
         )} />
         <Route path="/form-identitas" element={(
@@ -45,6 +86,13 @@ function App() {
           <>
             <Navbar/>
             <FormRHK/>
+            <Footer/>
+          </>
+        )} />
+        <Route path="/form-prilaku-kerja/:id" element={(
+          <>
+            <Navbar/>
+            <FormPrilakuKerja/>
             <Footer/>
           </>
         )} />

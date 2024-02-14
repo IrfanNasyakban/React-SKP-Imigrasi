@@ -1,14 +1,8 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css";
-import "../resources/fonts/Linearicons-Free-v1.0.0/icon-font.min.css";
-import "../resources/css/util.css";
-import "../resources/css/main.css";
-import "../styles/formIdentitas.css"
 
-const FormIdentitas = () => {
+const EditIdentitas = () => {
   const [namaPegawai, setNamaPegawai] = useState("");
   const [nipPegawai, setNipPegawai] = useState("");
   const [pngktAndGolRuangPegawai, setPngktAndGolRuangPegawai] = useState("");
@@ -20,21 +14,30 @@ const FormIdentitas = () => {
   const [jabatanPejabat, setJabatanPejabat] = useState("");
   const [unitKerjaPejabat, setUnitKerjaPejabat] = useState("");
   const navigate = useNavigate();
+  const { id } = useParams();
 
-  const saveIdentitas = async (e) => {
+  useEffect(() => {
+    getIdentitasById();
+  }, []);
+
+  const getIdentitasById = async () => {
+    const response = await axios.get(
+      `https://api-imigrasi.sucofindo-arsip.my.id/identitas/${id}`
+    );
+    setNamaPegawai(response.data.namaPegawai);
+    setNipPegawai(response.data.nipPegawai);
+    setPngktAndGolRuangPegawai(response.data.pngktAndGolRuangPegawai);
+    setJabatanPegawai(response.data.jabatanPegawai);
+    setUnitKerjaPegawai(response.data.unitKerjaPegawai);
+    setNamaPejabat(response.data.namaPejabat);
+    setNipPejabat(response.data.nipPejabat);
+    setPngktAndGolRuangPejabat(response.data.pngktAndGolRuangPejabat);
+    setJabatanPejabat(response.data.jabatanPejabat);
+    setUnitKerjaPejabat(response.data.unitKerjaPejabat);
+  };
+
+  const updateIdentitas = async (e) => {
     e.preventDefault();
-    console.log("State sebelum dikirim:", {
-      namaPegawai,
-      nipPegawai,
-      pngktAndGolRuangPegawai,
-      jabatanPegawai,
-      unitKerjaPegawai,
-      namaPejabat,
-      nipPejabat,
-      pngktAndGolRuangPejabat,
-      jabatanPejabat,
-      unitKerjaPejabat,
-    });
     const formData = new FormData();
     formData.append("namaPegawai", namaPegawai);
     formData.append("nipPegawai", nipPegawai);
@@ -46,28 +49,22 @@ const FormIdentitas = () => {
     formData.append("pngktAndGolRuangPejabat", pngktAndGolRuangPejabat);
     formData.append("jabatanPejabat", jabatanPejabat);
     formData.append("unitKerjaPejabat", unitKerjaPejabat);
-    console.log(formData);
 
     const jsonData = {};
     formData.forEach((value, key) => {
       jsonData[key] = value;
     });
-
     try {
-      const response = await axios.post("https://api-imigrasi.sucofindo-arsip.my.id/identitas", jsonData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      console.log(response.data.idIdentitas);
-      const newId = response.data.idIdentitas;
-      console.log("New ID:", newId);
-      if (newId) {
-        navigate(`/form-rhk-intervensi/${newId}`);
-      } else {
-        console.log("ID Identitas tidak valid.");
-      }
-      
+      await axios.patch(
+        `https://api-imigrasi.sucofindo-arsip.my.id/identitas/${id}`,
+        jsonData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      navigate(-1);
     } catch (error) {
       console.log(error);
     }
@@ -82,7 +79,7 @@ const FormIdentitas = () => {
         <div className="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
           <form
             className="login100-form validate-form flex-sb flex-w"
-            onSubmit={saveIdentitas}
+            onSubmit={updateIdentitas}
           >
             <span className="login100-form-title p-b-53">SKP</span>
 
@@ -293,9 +290,7 @@ const FormIdentitas = () => {
           </div> */}
 
             <div className="container-login100-form-btn m-t-17">
-              <button className="login100-form-btn">
-                Next
-              </button>
+              <button className="login100-form-btn">Update</button>
             </div>
           </form>
         </div>
@@ -304,4 +299,4 @@ const FormIdentitas = () => {
   );
 };
 
-export default FormIdentitas;
+export default EditIdentitas;

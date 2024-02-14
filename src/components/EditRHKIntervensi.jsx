@@ -1,53 +1,38 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css";
-import "../resources/fonts/Linearicons-Free-v1.0.0/icon-font.min.css";
-import "../resources/css/util.css";
-import "../resources/css/main.css";
 
-const FormRHKIntervensi = () => {
+const EditRHKIntervensi = () => {
   const [idIdentitas, setIdIdentitas] = useState();
   const [rhkIntervensi, setRhkIntervensi] = useState();
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    getIdentitasById();
-  });
+    getRhkIntervensiById();
+  }, []);
 
-  const getIdentitasById = async () => {
-    try {
-      const response = await axios.get(
-        `https://api-imigrasi.sucofindo-arsip.my.id/identitas/${id}`
-      );
-      setIdIdentitas(response.data.idIdentitas);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      // Handle error here
-    }
+  const getRhkIntervensiById = async () => {
+    const response = await axios.get(
+      `https://api-imigrasi.sucofindo-arsip.my.id/intervensi/${id}`
+    );
+    setIdIdentitas(response.data.idIdentitas);
+    setRhkIntervensi(response.data.rhkIntervensi);
   };
 
-  const saveRhkIntervensi = async (e) => {
+  const updateRhkIntervensi = async (e) => {
     e.preventDefault();
-    console.log("State sebelum dikirim:", {
-      idIdentitas,
-      rhkIntervensi,
-    });
     const formData = new FormData();
     formData.append("idIdentitas", idIdentitas);
     formData.append("rhkIntervensi", rhkIntervensi);
-    console.log(formData);
 
     const jsonData = {};
     formData.forEach((value, key) => {
       jsonData[key] = value;
     });
-
     try {
-      const response = await axios.post(
-        "https://api-imigrasi.sucofindo-arsip.my.id/intervensi",
+      await axios.patch(
+        `https://api-imigrasi.sucofindo-arsip.my.id/intervensi/${id}`,
         jsonData,
         {
           headers: {
@@ -55,13 +40,7 @@ const FormRHKIntervensi = () => {
           },
         }
       );
-      const newId = response.data.idIntervensi;
-      console.log("New ID:", newId);
-      if (newId) {
-        navigate(`/form-rhk/${newId}`);
-      } else {
-        console.log("ID Intervensi tidak valid.");
-      }
+      navigate(-1);
     } catch (error) {
       console.log(error);
     }
@@ -76,7 +55,7 @@ const FormRHKIntervensi = () => {
         <div className="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
           <form
             className="login100-form validate-form flex-sb flex-w"
-            onSubmit={saveRhkIntervensi}
+            onSubmit={updateRhkIntervensi}
           >
             <span className="login100-form-title p-b-53">SKP</span>
 
@@ -121,7 +100,7 @@ const FormRHKIntervensi = () => {
             </div>
 
             <div className="container-login100-form-btn m-t-17">
-              <button className="login100-form-btn">Next</button>
+              <button className="login100-form-btn">Update</button>
             </div>
           </form>
         </div>
@@ -130,4 +109,4 @@ const FormRHKIntervensi = () => {
   );
 };
 
-export default FormRHKIntervensi;
+export default EditRHKIntervensi;

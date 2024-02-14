@@ -1,91 +1,47 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
-import { Button, Modal } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-const FormRHK = () => {
-  const [rhkData, setRhkData] = useState([]);
-  const [idIntervensi, setidIntervensi] = useState();
+const EditRHK = () => {
+    const [idIntervensi, setIdIntervensi] = useState();
   const [rhk, setRhk] = useState();
   const [kuantitas, setKuantitas] = useState();
   const [kualitas, setKualitas] = useState();
   const [waktu, setWaktu] = useState();
   const { id } = useParams();
-  const [showModal, setShowModal] = useState(false);
-  const [showSaveModal, setShowSaveModal] = useState(false);
   const navigate = useNavigate();
 
-  const handleModalClose = () => {
-    setShowModal(false);
-    setShowSaveModal(false);
-  };
-
-  const handleNextButtonClick = () => {
-    if (
-      rhkData.filter((item) => item.idIntervensi === idIntervensi).length >= 3
-    ) {
-      setShowModal(true);
-    } else {
-      // Lanjutkan dengan proses selanjutnya
-      setShowSaveModal(true);
-    }
-  };
-
   useEffect(() => {
-    getIntervensiById();
-
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://api-imigrasi.sucofindo-arsip.my.id/rhk"
-        );
-        const data = await response.json();
-        setRhkData(data); // Set data RHK ke dalam state rhkData
-      } catch (error) {
-        console.error("Error fetching RHK data: ", error);
-      }
-    };
-    fetchData();
+    getRhkIntervensiById();
   }, []);
 
-  const getIntervensiById = async () => {
-    try {
-      const response = await axios.get(
-        `https://api-imigrasi.sucofindo-arsip.my.id/intervensi/${id}`
-      );
-      console.log(response.data.idIntervensi);
-      setidIntervensi(response.data.idIntervensi);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      // Handle error here
-    }
-  };
+  const getRhkIntervensiById = async () => {
+    const response = await axios.get(
+      `https://api-imigrasi.sucofindo-arsip.my.id/rhk/${id}`
+    );
+    setIdIntervensi(response.data.idIntervensi);
+    setRhk(response.data.rhk);
+    setKuantitas(response.data.kuantitas);
+    setKualitas(response.data.kualitas);
+    setWaktu(response.data.waktu);
+};
 
-  const saveRhkYes = async (e) => {
+const updateRhk = async (e) => {
     e.preventDefault();
-    console.log("State sebelum dikirim:", {
-      idIntervensi,
-      rhk,
-      kuantitas,
-      kualitas,
-      waktu,
-    });
     const formData = new FormData();
     formData.append("idIntervensi", idIntervensi);
     formData.append("rhk", rhk);
     formData.append("kuantitas", kuantitas);
     formData.append("kualitas", kualitas);
     formData.append("waktu", waktu);
-    console.log(formData);
 
     const jsonData = {};
     formData.forEach((value, key) => {
       jsonData[key] = value;
     });
-
     try {
-      await axios.post(
-        "https://api-imigrasi.sucofindo-arsip.my.id/rhk",
+      await axios.patch(
+        `https://api-imigrasi.sucofindo-arsip.my.id/rhk/${id}`,
         jsonData,
         {
           headers: {
@@ -93,70 +49,7 @@ const FormRHK = () => {
           },
         }
       );
-      window.location.reload();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const saveRhkNo = async (e) => {
-    e.preventDefault();
-    console.log("State sebelum dikirim:", {
-      idIntervensi,
-      rhk,
-      kuantitas,
-      kualitas,
-      waktu,
-    });
-    const formData = new FormData();
-    formData.append("idIntervensi", idIntervensi);
-    formData.append("rhk", rhk);
-    formData.append("kuantitas", kuantitas);
-    formData.append("kualitas", kualitas);
-    formData.append("waktu", waktu);
-    console.log(formData);
-
-    const jsonData = {};
-    formData.forEach((value, key) => {
-      jsonData[key] = value;
-    });
-
-    try {
-      const response = await axios.post(
-        "https://api-imigrasi.sucofindo-arsip.my.id/rhk",
-        jsonData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const newId = response.data.idIdentitas;
-      console.log("New ID:", newId);
-      if (newId) {
-        navigate(`/form-prilaku-kerja/${newId}`);
-      } else {
-        console.log("ID Intervensi tidak valid.");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const moveToPrilakuKerja = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.get(
-        `https://api-imigrasi.sucofindo-arsip.my.id/intervensi/${id}`
-      );
-      console.log(response.data.idIdentitas);
-      const newId = response.data.idIdentitas;
-      console.log("New ID:", newId);
-      if (newId) {
-        navigate(`/form-prilaku-kerja/${newId}`);
-      } else {
-        console.log("ID Intervensi tidak valid.");
-      }
+      navigate(-1);
     } catch (error) {
       console.log(error);
     }
@@ -169,7 +62,7 @@ const FormRHK = () => {
         style={{ backgroundImage: "url('images/bg-01.jpg')" }}
       >
         <div className="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
-          <form className="login100-form validate-form flex-sb flex-w">
+          <form className="login100-form validate-form flex-sb flex-w" onSubmit={updateRhk}>
             <span className="login100-form-title p-b-53">SKP</span>
 
             <div className="p-t-31 p-b-9">
@@ -286,49 +179,18 @@ const FormRHK = () => {
             </div>
 
             <div className="container-login100-form-btn m-t-17">
-              <Button
+              <button
                 className="login100-form-btn"
                 variant="primary"
-                onClick={handleNextButtonClick}
               >
-                Next
-              </Button>
-              <Modal show={showModal} onHide={handleModalClose} centered>
-                <Modal.Header closeButton>
-                  <Modal.Title className="text-danger">Alert!</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  Tidak Dapat menambahkan data lebih dari 3
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="primary" onClick={moveToPrilakuKerja}>
-                    Add Prilaku Kerja
-                  </Button>
-                </Modal.Footer>
-              </Modal>
-
-              <Modal show={showSaveModal} onHide={handleModalClose} centered>
-                <Modal.Header closeButton>
-                  <Modal.Title>Tersimpan</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  Apakah anda ingin menambahkan Rencana Hasil Kerja lagi?
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="success" onClick={saveRhkYes}>
-                    Iya
-                  </Button>
-                  <Button variant="primary" onClick={saveRhkNo}>
-                    Tidak
-                  </Button>
-                </Modal.Footer>
-              </Modal>
+                Update
+              </button>
             </div>
           </form>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default FormRHK;
+export default EditRHK

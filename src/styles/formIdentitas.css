@@ -1,0 +1,5 @@
+.background-identitas {
+    width: 100%;
+    background: url(../assets/hero-bg.png) top center no-repeat;
+    background-size: cover;
+  }

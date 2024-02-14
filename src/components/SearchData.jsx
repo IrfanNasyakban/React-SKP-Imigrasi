@@ -35,7 +35,7 @@ const SearchData = () => {
       if (searchNama.trim() !== "") {
         // Pastikan input nama tidak kosong
         const response = await axios.get(
-          `http://localhost:5000/identitas?search_query=${searchNama}`
+          `https://api-imigrasi.sucofindo-arsip.my.id/identitas?search_query=${searchNama}`
         );
         if (response.data.length > 0) {
           const data = response.data; // Mengambil semua objek dari array respons
@@ -67,80 +67,85 @@ const SearchData = () => {
   };
 
   return (
-    <div className="limiter">
-    <div className="container-login100" style={{ backgroundImage: "url('images/bg-01.jpg')" }}>
-      <div className="wrap-login100 p-l-110 p-r-110">
-        <form className="login100-form validate-form flex-sb flex-w">
-          <span className="login100-form-title p-b-40">Mencari Data SKP</span>
+    <div className="limiter background">
+      <div
+        className="container-login100"
+      >
+        <div className="wrap-login100 p-l-110 p-r-110">
+          <form className="login100-form validate-form flex-sb flex-w">
+            <span className="login100-form-title p-b-40">Mencari Data SKP</span>
 
-          <div className="p-t-21 p-b-9">
-            <span className="txt1">Cari Nama Pegawai</span>
-          </div>
-          <div className="wrap-input100 validate-input" data-validate="Username is required">
-            <input
-              className="input100"
-              type="text"
-              id="namaPegawai"
-              value={searchNama}
-              onChange={(e) => setSearchNama(e.target.value)}
-              required
-            />
-            <span className="focus-input100"></span>
-          </div>
-
-          <div className="container-login100-form-btn m-t-17">
-            <button
-              className="login100-form-btn"
-              onClick={(e) => {
-                e.preventDefault(); // Mencegah form submit
-                getIdentitasByNama(); // Panggil fungsi pencarian
-              }}
+            <div className="p-t-21 p-b-9">
+              <span className="txt1">Cari Nama Pegawai</span>
+            </div>
+            <div
+              className="wrap-input100 validate-input"
+              data-validate="Username is required"
             >
-              Cari
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+              <input
+                className="input100"
+                type="text"
+                id="namaPegawai"
+                value={searchNama}
+                onChange={(e) => setSearchNama(e.target.value)}
+                required
+              />
+              <span className="focus-input100"></span>
+            </div>
 
-    {idIdentitas && (
-      <div className="container-table">
-        <table className="table-kedua table colors table-bordered">
-          <thead>
-            <tr>
-              <th>ID Identitas</th>
-              <th>Nama Pegawai</th>
-              <th>NIP Pegawai</th>
-              <th>Nama Pejabat</th>
-              <th>NIP Pejabat</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* Mapping melalui array dan membuat baris-baris tabel */}
-            {idIdentitas.map((id, index) => (
-              <tr key={index}>
-                <td>{id}</td>
-                <td>{namaPegawai[index]}</td>
-                <td>{nipPegawai[index]}</td>
-                <td>{namaPejabat[index]}</td>
-                <td>{nipPejabat[index]}</td>
-                <td>
-                  <Link
-                            to={`/list/${idIdentitas[index]}`}
-                            className="btn btn-sm btn-success me-2"
-                          >
-                            View
-                          </Link>
-                  <button className="btn btn-sm btn-primary">Edit</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+            <div className="container-login100-form-btn m-t-17">
+              <button
+                className="login100-form-btn"
+                onClick={(e) => {
+                  e.preventDefault(); // Mencegah form submit
+                  getIdentitasByNama(); // Panggil fungsi pencarian
+                }}
+              >
+                Cari
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-    )}
-  </div>
+
+      {idIdentitas && (
+        <div className="container-table">
+          <table className="table-kedua table colors table-bordered">
+            <thead>
+              <tr>
+                <th>ID Identitas</th>
+                <th>Nama Pegawai</th>
+                <th>NIP Pegawai</th>
+                <th>Nama Pejabat</th>
+                <th>NIP Pejabat</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* Mapping melalui array dan membuat baris-baris tabel */}
+              {idIdentitas.map((id, index) => (
+                <tr key={index}>
+                  <td>{id}</td>
+                  <td>{namaPegawai[index]}</td>
+                  <td>{nipPegawai[index]}</td>
+                  <td>{namaPejabat[index]}</td>
+                  <td>{nipPejabat[index]}</td>
+                  <td>
+                    <Link
+                      to={`/list/${idIdentitas[index]}`}
+                      className="btn btn-sm btn-success me-2"
+                    >
+                      View
+                    </Link>
+                    <Link className="btn btn-sm btn-primary" to={`/edit/${idIdentitas[index]}`}>Edit</Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
   );
 };
 
