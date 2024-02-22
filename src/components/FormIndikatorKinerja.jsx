@@ -1,15 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
 import axios from "axios";
 
 const FormRHK = () => {
-  const [rhkData, setRhkData] = useState([]);
-  const [idIntervensi, setidIntervensi] = useState();
+  const [indikatorKinerjaData, setIndikatorKinerjaData] = useState([]);
+  const [idRhkStructure, setIdRhkStructure] = useState();
+  const [indikatorKinerja, setIndikatorKinerja] = useState();
+  const [target, setTarget] = useState();
+  const [perspektif, setPerspektif] = useState();
   const [rhk, setRhk] = useState();
-  const [kuantitas, setKuantitas] = useState();
-  const [kualitas, setKualitas] = useState();
-  const [waktu, setWaktu] = useState();
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [showSaveModal, setShowSaveModal] = useState(false);
@@ -22,7 +23,9 @@ const FormRHK = () => {
 
   const handleNextButtonClick = () => {
     if (
-      rhkData.filter((item) => item.idIntervensi === idIntervensi).length >= 3
+      indikatorKinerjaData.filter(
+        (item) => item.idRhkStructure === idRhkStructure
+      ).length >= 3
     ) {
       setShowModal(true);
     } else {
@@ -32,51 +35,47 @@ const FormRHK = () => {
   };
 
   useEffect(() => {
-    getIntervensiById();
+    getRhkStructureById();
 
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "https://api-imigrasi.sucofindo-arsip.my.id/rhk"
-        );
+        const response = await fetch("http://localhost:5000/indikator-kinerja");
         const data = await response.json();
-        setRhkData(data); // Set data RHK ke dalam state rhkData
+        setIndikatorKinerjaData(data); // Set data RHK ke dalam state rhkData
       } catch (error) {
-        console.error("Error fetching RHK data: ", error);
+        console.error("Error fetching Indikator Kinerja data: ", error);
       }
     };
     fetchData();
   }, []);
 
-  const getIntervensiById = async () => {
+  const getRhkStructureById = async () => {
     try {
       const response = await axios.get(
-        `https://api-imigrasi.sucofindo-arsip.my.id/intervensi/${id}`
+        `http://localhost:5000/rhk-structure/${id}`
       );
-      console.log(response.data.idIntervensi);
-      setidIntervensi(response.data.idIntervensi);
+      console.log(response.data.idRhkStructure);
+      setIdRhkStructure(response.data.idRhkStructure);
+      setRhk(response.data.rhk);
     } catch (error) {
       console.error("Error fetching data:", error);
       // Handle error here
     }
   };
 
-  const saveRhkYes = async (e) => {
+  const saveIndikatorKinerjaYes = async (e) => {
     e.preventDefault();
     console.log("State sebelum dikirim:", {
-      idIntervensi,
-      rhk,
-      kuantitas,
-      kualitas,
-      waktu,
+      idRhkStructure,
+      indikatorKinerja,
+      target,
+      perspektif,
     });
     const formData = new FormData();
-    formData.append("idIntervensi", idIntervensi);
-    formData.append("rhk", rhk);
-    formData.append("kuantitas", kuantitas);
-    formData.append("kualitas", kualitas);
-    formData.append("waktu", waktu);
-    console.log(formData);
+    formData.append("idRhkStructure", idRhkStructure);
+    formData.append("indikatorKinerja", indikatorKinerja);
+    formData.append("target", target);
+    formData.append("perspektif", perspektif);
 
     const jsonData = {};
     formData.forEach((value, key) => {
@@ -84,37 +83,30 @@ const FormRHK = () => {
     });
 
     try {
-      await axios.post(
-        "https://api-imigrasi.sucofindo-arsip.my.id/rhk",
-        jsonData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      await axios.post("http://localhost:5000/indikator-kinerja", jsonData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       window.location.reload();
     } catch (error) {
       console.log(error);
     }
   };
 
-  const saveRhkNo = async (e) => {
+  const saveIndikatorKinerjaNo = async (e) => {
     e.preventDefault();
     console.log("State sebelum dikirim:", {
-      idIntervensi,
-      rhk,
-      kuantitas,
-      kualitas,
-      waktu,
+      idRhkStructure,
+      indikatorKinerja,
+      target,
+      perspektif,
     });
     const formData = new FormData();
-    formData.append("idIntervensi", idIntervensi);
-    formData.append("rhk", rhk);
-    formData.append("kuantitas", kuantitas);
-    formData.append("kualitas", kualitas);
-    formData.append("waktu", waktu);
-    console.log(formData);
+    formData.append("idRhkStructure", idRhkStructure);
+    formData.append("indikatorKinerja", indikatorKinerja);
+    formData.append("target", target);
+    formData.append("perspektif", perspektif);
 
     const jsonData = {};
     formData.forEach((value, key) => {
@@ -123,7 +115,7 @@ const FormRHK = () => {
 
     try {
       const response = await axios.post(
-        "https://api-imigrasi.sucofindo-arsip.my.id/rhk",
+        "http://localhost:5000/indikator-kinerja",
         jsonData,
         {
           headers: {
@@ -131,10 +123,10 @@ const FormRHK = () => {
           },
         }
       );
-      const newId = response.data.idIdentitas;
+      const newId = response.data.idIdentitasStructure;
       console.log("New ID:", newId);
       if (newId) {
-        navigate(`/form-prilaku-kerja/${newId}`);
+        navigate(`/form-prilaku-kerja-structure/${newId}`);
       } else {
         console.log("ID Intervensi tidak valid.");
       }
@@ -143,19 +135,19 @@ const FormRHK = () => {
     }
   };
 
-  const moveToPrilakuKerja = async (e) => {
+  const moveToPrilakuKerjaStructure = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.get(
-        `https://api-imigrasi.sucofindo-arsip.my.id/intervensi/${id}`
+        `http://localhost:5000/rhk-structure/${id}`
       );
-      console.log(response.data.idIdentitas);
-      const newId = response.data.idIdentitas;
+      console.log(response.data.idIdentitasStructure);
+      const newId = response.data.idIdentitasStructure;
       console.log("New ID:", newId);
       if (newId) {
-        navigate(`/form-prilaku-kerja/${newId}`);
+        navigate(`/form-prilaku-kerja-structure/${newId}`);
       } else {
-        console.log("ID Intervensi tidak valid.");
+        console.log("ID Rhk Structure tidak valid.");
       }
     } catch (error) {
       console.log(error);
@@ -170,7 +162,7 @@ const FormRHK = () => {
       >
         <div className="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
           <form className="login100-form validate-form flex-sb flex-w">
-            <span className="login100-form-title p-b-53">SKP</span>
+            <span className="login100-form-title p-b-53">SKP Struktur</span>
 
             <div className="p-t-31 p-b-9">
               <span className="txt1">No ID</span>
@@ -182,15 +174,15 @@ const FormRHK = () => {
               <input
                 className="input100"
                 type="text"
-                name="idIntervensi"
+                name="idRhkStructure"
                 readOnly
-                value={idIntervensi || ""}
+                value={idRhkStructure || ""}
               />
               <span className="focus-input100"></span>
             </div>
 
             <div className="p-t-31 p-b-9">
-              <span className="txt1">Rencana Hasil Kerja</span>
+              <span className="txt1">Indikator Kinerja</span>
             </div>
             <div
               className="wrap-input100 validate-input"
@@ -198,40 +190,60 @@ const FormRHK = () => {
             >
               <select
                 className="input100"
-                id="rhk"
-                value={rhk}
-                onChange={(e) => setRhk(e.target.value)}
+                id="indikatorKinerja"
+                value={indikatorKinerja}
+                onChange={(e) => setIndikatorKinerja(e.target.value)}
               >
                 <option value={null}>-- Pilih --</option>
-                <option value="Melakukan Peneraan. Perpanjangan Izin Tinggal dan Alih Status Keimigrasian Warga Negara Asing">
-                  Melakukan Peneraan. Perpanjangan Izin Tinggal dan Alih Status
-                  Keimigrasian Warga Negara Asing
-                </option>
-                <option value="Melakukan Pemeriksaan Keimigrasian terhadap Awak Alat Angkut di TPI">
-                  Melakukan Pemeriksaan Keimigrasian terhadap Awak Alat Angkut
-                  di TPI
-                </option>
-                <option value="Melakukan Pengambilan Biometrik dan Wawancara Pemohon DPRI">
-                  Melakukan Pengambilan Biometrik dan Wawancara Pemohon DPRI
-                </option>
-                <option value="Melakukan Pemetaan terkait Keberadaan dan Kegiatan Warga Negara Asing di Wilayah Kerja Kanim">
-                  Melakukan Pemetaan terkait Keberadaan dan Kegiatan Warga
-                  Negara Asing di Wilayah Kerja Kanim
-                </option>
-                <option value="Melakukan Pengelolaan Sumber Daya Manusia">
-                  Melakukan Pengelolaan Sumber Daya Manusia
-                </option>
-                <option value="Melakukan Pengelolaan Tata Usaha">
-                  Melakukan Pengelolaan Tata Usaha
-                </option>
+                {rhk ===
+                "Melakukan Pengelolaan Sumber Daya Manusia dan Tata Usaha" ? (
+                  <>
+                    <option
+                      value="melaksanakan/menyiapkan bahan usulan kenaikan
+pangkat, kenaikan gaji berkala, penetapan status
+kepegawaian, pembuatan kartu Pegawai, kartu"
+                    >
+                      melaksanakan/menyiapkan bahan usulan kenaikan pangkat,
+                      kenaikan gaji berkala, penetapan status kepegawaian,
+                      pembuatan kartu Pegawai, kartu
+                    </option>
+                    <option
+                      value="Mengelola Aplikasi Sistem Informasi
+Kepegawaian (SIMPEG)"
+                    >
+                      Mengelola Aplikasi Sistem Informasi Kepegawaian (SIMPEG)
+                    </option>
+                    <option value="3">3</option>
+                  </>
+                ) : rhk === "melaksanakan pengelolaan administrasi" ? (
+                  <>
+                    <option
+                      value="Mengelola Sistem Informasi Surat Masuk dan
+Surat Keluar"
+                    >
+                      Mengelola Sistem Informasi Surat Masuk dan Surat Keluar
+                    </option>
+                    <option value="123">123</option>
+                  </>
+                ) : rhk === "makan" ? (
+                  <>
+                    <option value="nasi">Nasi</option>
+                    <option value="mie">Mie</option>
+                    <option value="sayur">Sayur</option>
+                  </>
+                ) : rhk === "minum" ? (
+                  <>
+                    <option value="air">Air</option>
+                    <option value="susu">Susu</option>
+                    <option value="jus">Jus</option>
+                  </>
+                ) : null}
               </select>
               <span className="focus-input100"></span>
             </div>
 
             <div className="p-t-31 p-b-9">
-              <span className="txt1">
-                Jumlah Pelaksanaan Kegiatan Dalam 1 Tahun
-              </span>
+              <span className="txt1">Target</span>
             </div>
             <div
               className="wrap-input100 validate-input"
@@ -240,19 +252,17 @@ const FormRHK = () => {
               <input
                 className="input100"
                 type="text"
-                id="kuantitas"
-                name="kuantitas"
-                value={kuantitas}
-                onChange={(e) => setKuantitas(e.target.value)}
+                id="target"
+                name="target"
+                value={target}
+                onChange={(e) => setTarget(e.target.value)}
                 required
               />
               <span className="focus-input100"></span>
             </div>
 
             <div className="p-t-31 p-b-9">
-              <span className="txt1">
-                Tingkat Kesesuaian Dengan Pelaksanaan Kegiatan
-              </span>
+              <span className="txt1">Perspektif</span>
             </div>
             <div
               className="wrap-input100 validate-input"
@@ -261,31 +271,10 @@ const FormRHK = () => {
               <input
                 className="input100"
                 type="text"
-                id="kualitas"
-                name="kualitas"
-                value={kualitas}
-                onChange={(e) => setKualitas(e.target.value)}
-                required
-              />
-              <span className="focus-input100"></span>
-            </div>
-
-            <div className="p-t-31 p-b-9">
-              <span className="txt1">
-                Ketepatan Waktu Penyelesaian Kegiatan
-              </span>
-            </div>
-            <div
-              className="wrap-input100 validate-input"
-              data-validate="Username is required"
-            >
-              <input
-                className="input100"
-                type="text"
-                id="waktu"
-                name="waktu"
-                value={waktu}
-                onChange={(e) => setWaktu(e.target.value)}
+                id="perspektif"
+                name="perspektif"
+                value={perspektif}
+                onChange={(e) => setPerspektif(e.target.value)}
                 required
               />
               <span className="focus-input100"></span>
@@ -307,7 +296,10 @@ const FormRHK = () => {
                   Tidak Dapat menambahkan data lebih dari 3
                 </Modal.Body>
                 <Modal.Footer>
-                  <Button variant="primary" onClick={moveToPrilakuKerja}>
+                  <Button
+                    variant="primary"
+                    onClick={moveToPrilakuKerjaStructure}
+                  >
                     Add Prilaku Kerja
                   </Button>
                 </Modal.Footer>
@@ -318,13 +310,13 @@ const FormRHK = () => {
                   <Modal.Title>Tersimpan</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  Apakah anda ingin menambahkan Rencana Hasil Kerja lagi?
+                  Apakah anda ingin menambahkan Indikator Kinerja lagi?
                 </Modal.Body>
                 <Modal.Footer>
-                  <Button variant="success" onClick={saveRhkYes}>
+                  <Button variant="success" onClick={saveIndikatorKinerjaYes}>
                     Iya
                   </Button>
-                  <Button variant="primary" onClick={saveRhkNo}>
+                  <Button variant="primary" onClick={saveIndikatorKinerjaNo}>
                     Tidak
                   </Button>
                 </Modal.Footer>

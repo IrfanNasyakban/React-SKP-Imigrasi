@@ -15,6 +15,12 @@ import EditIdentitas from './components/EditIdentitas';
 import EditRHKIntervensi from './components/EditRHKIntervensi';
 import EditRHK from './components/EditRHK';
 import EditPrilakuKerja from './components/EditPrilakuKerja';
+import ListDataStructural from './components/ListDataStructural';
+import FormIdentitasStructure from './components/FormIdentitasStructure';
+import FormRHKStructure from './components/FormRhkStructure';
+import FormIndikatorKinerja from './components/FormIndikatorKinerja';
+import FormPrilakuKerjaStructure from './components/FormPrilakuKerjaStructure';
+import SearchDataStructure from './components/SearchDataStructure';
 
 function App() {
 
@@ -31,6 +37,12 @@ function App() {
           <>
             <Navbar/>
             <SearchData/>
+          </>
+        )} />
+        <Route path="/search-structure" element={(
+          <>
+            <Navbar/>
+            <SearchDataStructure/>
           </>
         )} />
         <Route path="/edit/:id" element={(
@@ -96,10 +108,44 @@ function App() {
             <Footer/>
           </>
         )} />
+        <Route path="/form-identitas-structure" element={(
+          <>
+            <Navbar/>
+            <FormIdentitasStructure/>
+            <Footer/>
+          </>
+        )} />
+        <Route path="/form-rhk-structure/:id" element={(
+          <>
+            <Navbar/>
+            <FormRHKStructure/>
+            <Footer/>
+          </>
+        )} />
+        <Route path="/form-indikator-kinerja-structure/:id" element={(
+          <>
+            <Navbar/>
+            <FormIndikatorKinerja/>
+            <Footer/>
+          </>
+        )} />
+        <Route path="/form-prilaku-kerja-structure/:id" element={(
+          <>
+            <Navbar/>
+            <FormPrilakuKerjaStructure/>
+            <Footer/>
+          </>
+        )} />
         <Route path="/list/:id" element={(
           <>
             <Navbar/>
             <ListData/>
+          </>
+        )} />
+        <Route path="/list-structure/:id" element={(
+          <>
+            <Navbar/>
+            <ListDataStructural/>
           </>
         )} />
       </Routes>

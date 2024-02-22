@@ -52,6 +52,16 @@ function Navbar() {
                 Cari Data SKP
               </a>
             </li>
+            <li className="nav-item">
+              <a className="nav-link text-putih" href="/form-identitas-structure">
+                Buat SKP Struktural
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link text-putih" href="/search-structure">
+                Cari Data Struktural
+              </a>
+            </li>
           </ul>
           {/* <!-- Left links --> */}
         </div>

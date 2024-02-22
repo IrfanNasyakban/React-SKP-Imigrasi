@@ -25,11 +25,29 @@ const Dashboard = () => {
                 </Link>
                 <Link
                   to="/search"
-                  className="btn-get-started d-inline-flex align-items-center justify-content-center align-self-center"
+                  className="btn-get-started d-inline-flex align-items-center justify-content-center align-self-center me-2"
                   smooth={true}
                   duration={1000}
                 >
                   <span>Cari Data</span>
+                  <i className="bi bi-arrow-right"></i>
+                </Link>
+                <Link
+                  to="/form-identitas-structure"
+                  className="btn-get-started d-inline-flex align-items-center justify-content-center align-self-center me-2"
+                  smooth={true}
+                  duration={1000}
+                >
+                  <span>Buat Data Struktural</span>
+                  <i className="bi bi-arrow-right"></i>
+                </Link>
+                <Link
+                  to="/search-structure"
+                  className="btn-get-started d-inline-flex align-items-center justify-content-center align-self-center"
+                  smooth={true}
+                  duration={1000}
+                >
+                  <span>Cari Data Struktural</span>
                   <i className="bi bi-arrow-right"></i>
                 </Link>
               </div>
