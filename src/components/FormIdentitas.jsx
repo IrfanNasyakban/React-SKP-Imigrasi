@@ -54,7 +54,7 @@ const FormIdentitas = () => {
     });
 
     try {
-      const response = await axios.post("https://api-imigrasi.sucofindo-arsip.my.id/identitas", jsonData, {
+      const response = await axios.post("http://localhost:5000/identitas", jsonData, {
         headers: {
           "Content-Type": "application/json",
         },

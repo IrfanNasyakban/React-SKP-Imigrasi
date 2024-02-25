@@ -20,7 +20,7 @@ const FormRHKIntervensi = () => {
   const getIdentitasById = async () => {
     try {
       const response = await axios.get(
-        `https://api-imigrasi.sucofindo-arsip.my.id/identitas/${id}`
+        `http://localhost:5000/identitas/${id}`
       );
       setIdIdentitas(response.data.idIdentitas);
     } catch (error) {
@@ -47,7 +47,7 @@ const FormRHKIntervensi = () => {
 
     try {
       const response = await axios.post(
-        "https://api-imigrasi.sucofindo-arsip.my.id/intervensi",
+        "http://localhost:5000/intervensi",
         jsonData,
         {
           headers: {
@@ -113,8 +113,8 @@ const FormRHKIntervensi = () => {
                 onChange={(e) => setRhkIntervensi(e.target.value)}
               >
                 <option value={null}>-- Pilih --</option>
-                <option value="Pelaksanaan Pemilihan Pemberian Kredit Imigrasi">
-                  Pelaksanaan Pemilihan Pemberian Kredit Imigrasi
+                <option value="Melakukan Pemberian Dokumen Perjalanan Republik Indonesia (DPRI) kepada Pemohon yang telah lengkap sesuai Prosedur dan Peraturan yang berlaku">
+                  Melakukan Pemberian Dokumen Perjalanan Republik Indonesia (DPRI) kepada Pemohon yang telah Lengkap sesuai Prosedur dan Peraturan yang berlaku
                 </option>
               </select>
               <span className="focus-input100"></span>

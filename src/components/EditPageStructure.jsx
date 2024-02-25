@@ -1,11 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import "../styles/editPage.css";
 
-const EditPage = () => {
-  const [idIdentitas, setIdIdentitas] = useState("");
+const EditPageStructure = () => {
+  const [idIdentitasStructure, setIdIdentitasStructure] = useState("");
   const [namaPegawai, setNamaPegawai] = useState("");
   const [nipPegawai, setNipPegawai] = useState("");
   const [pngktAndGolRuangPegawai, setPngktAndGolRuangPegawai] = useState("");
@@ -16,26 +17,26 @@ const EditPage = () => {
   const [pngktAndGolRuangPejabat, setPngktAndGolRuangPejabat] = useState("");
   const [jabatanPejabat, setJabatanPejabat] = useState("");
   const [unitKerjaPejabat, setUnitKerjaPejabat] = useState("");
-  const [intervensiByIdIdentitas, setIntervensiByIdIdentitas] = useState("");
-  const [rhkByIdIdentitas, setRhkByIdIdentitas] = useState("");
-  const [prilakuKerjaByIdIdentitas, setPrilakuKerjaByIdIdentitas] =
+  const [rhkStructureByIdIdentitas, setRhkStructureByIdIdentitas] = useState("");
+  const [indikatorKinerjaByIdIdentitas, setIndikatorKinerjaByIdIdentitas] = useState("");
+  const [prilakuKerjaStructureByIdIdentitas, setPrilakuKerjaStructureByIdIdentitas] =
     useState("");
   const { id } = useParams();
 
   useEffect(() => {
-    getIdentitasById();
-    getIntervensiByIdIdentitas();
-    getRhkByIdIdentitas();
-    getPrilakuKerjaByIdIdentitas();
-  });
+    getIdentitasStructureById();
+    getRhkStructureByIdIdentitas();
+    getIndikatorKinerjaByIdIdentitas();
+    getPrilakuKerjaStructureByIdIdentitas();
+  }, []);
 
-  const getIdentitasById = async () => {
+  const getIdentitasStructureById = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/identitas/${id}`
+        `http://localhost:5000/identitas-structure/${id}`
       );
       const {
-        idIdentitas,
+        idIdentitasStructure,
         namaPegawai,
         nipPegawai,
         pngktAndGolRuangPegawai,
@@ -48,7 +49,7 @@ const EditPage = () => {
         unitKerjaPejabat,
       } = response.data;
 
-      setIdIdentitas(idIdentitas);
+      setIdIdentitasStructure(idIdentitasStructure);
       setNamaPegawai(namaPegawai);
       setNipPegawai(nipPegawai);
       setPngktAndGolRuangPegawai(pngktAndGolRuangPegawai);
@@ -64,34 +65,34 @@ const EditPage = () => {
     }
   };
 
-  const getIntervensiByIdIdentitas = async () => {
+  const getRhkStructureByIdIdentitas = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/intervensi?idIdentitas=${id}`
+        `http://localhost:5000/rhk-structure?idIdentitasStructure=${id}`
       );
-      setIntervensiByIdIdentitas(response.data);
+      setRhkStructureByIdIdentitas(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  const getRhkByIdIdentitas = async () => {
+  const getIndikatorKinerjaByIdIdentitas = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/rhk/identitas/${id}`
+        `http://localhost:5000/indikator-kinerja/identitas-structure/${id}`
       );
-      setRhkByIdIdentitas(response.data);
+      setIndikatorKinerjaByIdIdentitas(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  const getPrilakuKerjaByIdIdentitas = async () => {
+  const getPrilakuKerjaStructureByIdIdentitas = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/prilaku-kerja?idIdentitas=${id}`
+        `http://localhost:5000/prilaku-kerja-structure?idIdentitasStructure=${id}`
       );
-      setPrilakuKerjaByIdIdentitas(response.data);
+      setPrilakuKerjaStructureByIdIdentitas(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -131,7 +132,7 @@ const EditPage = () => {
               <td>{unitKerjaPejabat}</td>
               <td>
                 <Link
-                  to={`/edit/identitas/${id}`}
+                  to={`/edit/identitas-structure/${id}`}
                   className="btn btn-sm btn-primary"
                 >
                   Edit
@@ -142,29 +143,29 @@ const EditPage = () => {
         </table>
       </div>
 
-      <span className="ukuran-title p-b-20 p-t-20">Tabel RHK Intervensi</span>
+      <span className="ukuran-title p-b-20 p-t-20">Tabel RHK</span>
 
       <div className="container-table">
         {/* <h3>Tabel RHK Intervensi</h3> */}
         <table className="table-kedua table colors table-bordered">
           <thead>
             <tr>
-              <th>Intervensi RHK</th>
+              <th>RHK</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {intervensiByIdIdentitas.length === 0 ? (
+            {rhkStructureByIdIdentitas.length === 0 ? (
               <tr>
                 <td colSpan="10">Tidak terdapat data yang tersimpan</td>
               </tr>
             ) : (
-              intervensiByIdIdentitas.map((data, index) => (
+              rhkStructureByIdIdentitas.map((data, index) => (
                 <tr key={data.id}>
-                  <td>{data.rhkIntervensi}</td>
+                  <td>{data.rhk}</td>
                   <td>
                     <Link
-                      to={`/edit/intervensi/${data.idIntervensi}`}
+                      to={`/edit/rhk-structure/${data.idRhkStructure}`}
                       className="btn btn-sm btn-primary"
                     >
                       Edit
@@ -177,34 +178,32 @@ const EditPage = () => {
           </tbody>
         </table>
       </div>
-      <span className="ukuran-title p-b-20 p-t-20">Tabel RHK</span>
+      <span className="ukuran-title p-b-20 p-t-20">Tabel Indikator Kinerja</span>
       <div className="container-table">
         {/* <h3>Tabel RHK</h3> */}
         <table className="table-kedua table colors table-bordered">
           <thead>
             <tr>
-              <th>RHK</th>
-              <th>Kuantitas</th>
-              <th>Kualitas</th>
-              <th>Waktu</th>
+              <th>Indikator Kinerja</th>
+              <th>Target</th>
+              <th>Perspektif</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {rhkByIdIdentitas.length === 0 ? (
+            {indikatorKinerjaByIdIdentitas.length === 0 ? (
               <tr>
                 <td colSpan="10">Tidak terdapat data yang tersimpan</td>
               </tr>
             ) : (
-              rhkByIdIdentitas.map((data, index) => (
+              indikatorKinerjaByIdIdentitas.map((data, index) => (
                 <tr key={data.id}>
-                  <td>{data.rhk}</td>
-                  <td>{data.kuantitas}</td>
-                  <td>{data.kualitas}</td>
-                  <td>{data.waktu}</td>
+                  <td>{data.indikatorKinerja}</td>
+                  <td>{data.target}</td>
+                  <td>{data.perspektif}</td>
                   <td>
                     <Link
-                      to={`/edit/rhk/${data.idRhk}`}
+                      to={`/edit/indikator-kinerja-structure/${data.idIndikatorKinerja}`}
                       className="btn btn-sm btn-primary"
                     >
                       Edit
@@ -233,12 +232,12 @@ const EditPage = () => {
             </tr>
           </thead>
           <tbody>
-            {prilakuKerjaByIdIdentitas.length === 0 ? (
+            {prilakuKerjaStructureByIdIdentitas.length === 0 ? (
               <tr>
                 <td colSpan="10">Tidak terdapat data yang tersimpan</td>
               </tr>
             ) : (
-              prilakuKerjaByIdIdentitas.map((data, index) => (
+              prilakuKerjaStructureByIdIdentitas.map((data, index) => (
                 <tr key={data.id}>
                   <td>{data.berorientasiPelayanan}</td>
                   <td>{data.akuntabel}</td>
@@ -249,7 +248,7 @@ const EditPage = () => {
                   <td>{data.kolaboratif}</td>
                   <td>
                     <Link
-                      to={`/edit/prilaku-kerja/${data.idPrilakuKerja}`}
+                      to={`/edit/prilaku-kerja-structure/${data.idPrilakuKerjaStructure}`}
                       className="btn btn-sm btn-primary"
                     >
                       Edit
@@ -265,4 +264,4 @@ const EditPage = () => {
   );
 };
 
-export default EditPage;
+export default EditPageStructure;

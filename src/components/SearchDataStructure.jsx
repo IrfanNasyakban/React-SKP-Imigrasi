@@ -137,7 +137,7 @@ const SearchDataStructure = () => {
                     >
                       View
                     </Link>
-                    <Link className="btn btn-sm btn-primary" to={`/edit/${idIdentitasStructure[index]}`}>Edit</Link>
+                    <Link className="btn btn-sm btn-primary" to={`/edit-structure/${idIdentitasStructure[index]}`}>Edit</Link>
                   </td>
                 </tr>
               ))}

@@ -1,92 +1,69 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-const FormPrilakuKerja = () => {
-  const [idIdentitas, setIdIdentitas] = useState();
-  const [berorientasiPelayanan, setBerorientasiPelayanan] = useState();
-  const [akuntabel, setAkuntabel] = useState();
-  const [kompeten, setKompeten] = useState();
-  const [harmonis, setHarmonis] = useState();
-  const [loyal, setLoyal] = useState();
-  const [adaptif, setAdaptif] = useState();
-  const [kolaboratif, setKolaboratif] = useState();
-  const { id } = useParams();
-  const navigate = useNavigate();
+const EditPrilakuKerjaStructure = () => {
+    const [idIdentitasStructure, setIdIdentitasStructure] = useState();
+    const [berorientasiPelayanan, setBerorientasiPelayanan] = useState();
+    const [akuntabel, setAkuntabel] = useState();
+    const [kompeten, setKompeten] = useState();
+    const [harmonis, setHarmonis] = useState();
+    const [loyal, setLoyal] = useState();
+    const [adaptif, setAdaptif] = useState();
+    const [kolaboratif, setKolaboratif] = useState();
+    const { id } = useParams();
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    getPrilakuKerjaById();
-    getIdentitasById();
-  });
-
-  const getIdentitasById = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:5000/identitas/${id}`
-      );
-      console.log(response.data.idIdentitas);
-      setIdIdentitas(response.data.idIdentitas);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      // Handle error here
-    }
-  };
-
-  const getPrilakuKerjaById = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:5000/prilaku-kerja/${id}`
-      );
-      setIdIdentitas(response.data.idIdentitas);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      // Handle error here
-    }
-  };
-
-  const savePrilakuKerja = async (e) => {
-    e.preventDefault();
-    console.log("State sebelum dikirim:", {
-      idIdentitas,
-      berorientasiPelayanan,
-      akuntabel,
-      kompeten,
-      harmonis,
-      loyal,
-      adaptif,
-      kolaboratif,
-    });
-    const formData = new FormData();
-    formData.append("idIdentitas", idIdentitas);
-    formData.append("berorientasiPelayanan", berorientasiPelayanan);
-    formData.append("akuntabel", akuntabel);
-    formData.append("kompeten", kompeten);
-    formData.append("harmonis", harmonis);
-    formData.append("loyal", loyal);
-    formData.append("adaptif", adaptif);
-    formData.append("kolaboratif", kolaboratif);
-    console.log(formData);
-
-    const jsonData = {};
-    formData.forEach((value, key) => {
-      jsonData[key] = value;
-    });
-
-    try {
-      await axios.post(
-        "http://localhost:5000/prilaku-kerja",
-        jsonData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
+    useEffect(() => {
+        getPrilakuKerjaStructureById();
+      }, []);
+    
+      const getPrilakuKerjaStructureById = async () => {
+        const response = await axios.get(
+          `http://localhost:5000/prilaku-kerja-structure/${id}`
+        );
+        setIdIdentitasStructure(response.data.idIdentitasStructure);
+        setBerorientasiPelayanan(response.data.berorientasiPelayanan);
+        setAkuntabel(response.data.akuntabel);
+        setKompeten(response.data.kompeten);
+        setHarmonis(response.data.harmonis);
+        setLoyal(response.data.loyal);
+        setAdaptif(response.data.adaptif);
+        setKolaboratif(response.data.kolaboratif);
+    };
+    
+    const updatePrilakuKerja = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("idIdentitasStructure", idIdentitasStructure);
+        formData.append("berorientasiPelayanan", berorientasiPelayanan);
+        formData.append("akuntabel", akuntabel);
+        formData.append("kompeten", kompeten);
+        formData.append("harmonis", harmonis);
+        formData.append("loyal", loyal);
+        formData.append("adaptif", adaptif);
+        formData.append("kolaboratif", kolaboratif);
+    
+        const jsonData = {};
+        formData.forEach((value, key) => {
+          jsonData[key] = value;
+        });
+        try {
+          await axios.patch(
+            `http://localhost:5000/prilaku-kerja-structure/${id}`,
+            jsonData,
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          navigate(-1);
+        } catch (error) {
+          console.log(error);
         }
-      );
-      navigate("/search");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+      };
 
   return (
     <div className="limiter background-identitas">
@@ -97,7 +74,7 @@ const FormPrilakuKerja = () => {
         <div className="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
           <form
             className="login100-form validate-form flex-sb flex-w"
-            onSubmit={savePrilakuKerja}
+            onSubmit={updatePrilakuKerja}
           >
             <span className="login100-form-title p-b-53">SKP</span>
 
@@ -111,9 +88,9 @@ const FormPrilakuKerja = () => {
               <input
                 className="input100"
                 type="text"
-                name="idIdentitas"
+                name="idIdentitasStructure"
                 readOnly
-                value={idIdentitas || ""}
+                value={idIdentitasStructure || ""}
               />
               <span className="focus-input100"></span>
             </div>
@@ -260,14 +237,14 @@ const FormPrilakuKerja = () => {
 
             <div className="container-login100-form-btn m-t-17">
               <button className="login100-form-btn" variant="primary">
-                Next
+                Update
               </button>
             </div>
           </form>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default FormPrilakuKerja;
+export default EditPrilakuKerjaStructure

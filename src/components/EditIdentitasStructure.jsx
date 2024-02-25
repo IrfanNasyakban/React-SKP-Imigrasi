@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-const EditIdentitas = () => {
+const EditIdentitasStructure = () => {
   const [namaPegawai, setNamaPegawai] = useState("");
   const [nipPegawai, setNipPegawai] = useState("");
   const [pngktAndGolRuangPegawai, setPngktAndGolRuangPegawai] = useState("");
@@ -18,12 +18,12 @@ const EditIdentitas = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    getIdentitasById();
+    getIdentitasStructureById();
   }, []);
 
-  const getIdentitasById = async () => {
+  const getIdentitasStructureById = async () => {
     const response = await axios.get(
-      `http://localhost:5000/identitas/${id}`
+      `http://localhost:5000/identitas-structure/${id}`
     );
     setNamaPegawai(response.data.namaPegawai);
     setNipPegawai(response.data.nipPegawai);
@@ -37,7 +37,7 @@ const EditIdentitas = () => {
     setUnitKerjaPejabat(response.data.unitKerjaPejabat);
   };
 
-  const updateIdentitas = async (e) => {
+  const updateIdentitasStructure = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("namaPegawai", namaPegawai);
@@ -57,7 +57,7 @@ const EditIdentitas = () => {
     });
     try {
       await axios.patch(
-        `http://localhost:5000/identitas/${id}`,
+        `http://localhost:5000/identitas-structure/${id}`,
         jsonData,
         {
           headers: {
@@ -80,9 +80,9 @@ const EditIdentitas = () => {
         <div className="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
           <form
             className="login100-form validate-form flex-sb flex-w"
-            onSubmit={updateIdentitas}
+            onSubmit={updateIdentitasStructure}
           >
-            <span className="login100-form-title p-b-53">SKP</span>
+            <span className="login100-form-title p-b-53">SKP Struktur</span>
 
             <div className="p-t-31 p-b-9">
               <span className="txt1">Nama Pegawai Yang Dinilai</span>
@@ -300,4 +300,4 @@ const EditIdentitas = () => {
   );
 };
 
-export default EditIdentitas;
+export default EditIdentitasStructure;

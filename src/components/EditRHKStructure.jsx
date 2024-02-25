@@ -3,29 +3,29 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-const EditRHKIntervensi = () => {
-  const [idIdentitas, setIdIdentitas] = useState();
-  const [rhkIntervensi, setRhkIntervensi] = useState();
+const EditRHKStructure = () => {
+  const [idIdentitasStructure, setIdIdentitasStructure] = useState();
+  const [rhk, setRhk] = useState();
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    getRhkIntervensiById();
+    getRhkStructureById();
   }, []);
 
-  const getRhkIntervensiById = async () => {
+  const getRhkStructureById = async () => {
     const response = await axios.get(
-      `http://localhost:5000/intervensi/${id}`
+      `http://localhost:5000/rhk-structure/${id}`
     );
-    setIdIdentitas(response.data.idIdentitas);
-    setRhkIntervensi(response.data.rhkIntervensi);
+    setIdIdentitasStructure(response.data.idIdentitasStructure);
+    setRhk(response.data.rhk);
   };
 
-  const updateRhkIntervensi = async (e) => {
+  const updateRhkStructure = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("idIdentitas", idIdentitas);
-    formData.append("rhkIntervensi", rhkIntervensi);
+    formData.append("idIdentitasStructure", idIdentitasStructure);
+    formData.append("rhk", rhk);
 
     const jsonData = {};
     formData.forEach((value, key) => {
@@ -33,7 +33,7 @@ const EditRHKIntervensi = () => {
     });
     try {
       await axios.patch(
-        `http://localhost:5000/intervensi/${id}`,
+        `http://localhost:5000/rhk-structure/${id}`,
         jsonData,
         {
           headers: {
@@ -56,7 +56,7 @@ const EditRHKIntervensi = () => {
         <div className="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
           <form
             className="login100-form validate-form flex-sb flex-w"
-            onSubmit={updateRhkIntervensi}
+            onSubmit={updateRhkStructure}
           >
             <span className="login100-form-title p-b-53">SKP</span>
 
@@ -70,16 +70,16 @@ const EditRHKIntervensi = () => {
               <input
                 className="input100"
                 type="text"
-                name="idIdentitas"
+                name="idIdentitasStructure"
                 readOnly
-                value={idIdentitas || ""}
+                value={idIdentitasStructure || ""}
               />
               <span className="focus-input100"></span>
             </div>
 
             <div className="p-t-31 p-b-9">
               <span className="txt1">
-                Rencana Hasil Kerja Atasan Yang Diintervensi
+                Rencana Hasil Kerja
               </span>
             </div>
             <div
@@ -88,13 +88,13 @@ const EditRHKIntervensi = () => {
             >
               <select
                 className="input100"
-                id="rhkIntervensi"
-                value={rhkIntervensi}
-                onChange={(e) => setRhkIntervensi(e.target.value)}
+                id="rhk"
+                value={rhk}
+                onChange={(e) => setRhk(e.target.value)}
               >
                 <option value={null}>-- Pilih --</option>
-                <option value="Pelaksanaan Pemilihan Pemberian Kredit Imigrasi">
-                  Pelaksanaan Pemilihan Pemberian Kredit Imigrasi
+                <option value="Melakukan Pengelolaan Sumber Daya Manusia dan Tata Usaha">
+                  Melakukan Pengelolaan Sumber Daya Manusia dan Tata Usaha
                 </option>
               </select>
               <span className="focus-input100"></span>
@@ -110,4 +110,4 @@ const EditRHKIntervensi = () => {
   );
 };
 
-export default EditRHKIntervensi;
+export default EditRHKStructure;

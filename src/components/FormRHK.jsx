@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
 import axios from "axios";
 
@@ -10,6 +11,7 @@ const FormRHK = () => {
   const [kuantitas, setKuantitas] = useState();
   const [kualitas, setKualitas] = useState();
   const [waktu, setWaktu] = useState();
+  const [rhkIntervensi, setRhkIntervensi] = useState();
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [showSaveModal, setShowSaveModal] = useState(false);
@@ -22,7 +24,7 @@ const FormRHK = () => {
 
   const handleNextButtonClick = () => {
     if (
-      rhkData.filter((item) => item.idIntervensi === idIntervensi).length >= 3
+      rhkData.filter((item) => item.idIntervensi === idIntervensi).length >= 4
     ) {
       setShowModal(true);
     } else {
@@ -37,7 +39,7 @@ const FormRHK = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://api-imigrasi.sucofindo-arsip.my.id/rhk"
+          "http://localhost:5000/rhk"
         );
         const data = await response.json();
         setRhkData(data); // Set data RHK ke dalam state rhkData
@@ -51,10 +53,11 @@ const FormRHK = () => {
   const getIntervensiById = async () => {
     try {
       const response = await axios.get(
-        `https://api-imigrasi.sucofindo-arsip.my.id/intervensi/${id}`
+        `http://localhost:5000/intervensi/${id}`
       );
       console.log(response.data.idIntervensi);
       setidIntervensi(response.data.idIntervensi);
+      setRhkIntervensi(response.data.rhkIntervensi);
     } catch (error) {
       console.error("Error fetching data:", error);
       // Handle error here
@@ -85,7 +88,7 @@ const FormRHK = () => {
 
     try {
       await axios.post(
-        "https://api-imigrasi.sucofindo-arsip.my.id/rhk",
+        "http://localhost:5000/rhk",
         jsonData,
         {
           headers: {
@@ -123,7 +126,7 @@ const FormRHK = () => {
 
     try {
       const response = await axios.post(
-        "https://api-imigrasi.sucofindo-arsip.my.id/rhk",
+        "http://localhost:5000/rhk",
         jsonData,
         {
           headers: {
@@ -147,7 +150,7 @@ const FormRHK = () => {
     e.preventDefault();
     try {
       const response = await axios.get(
-        `https://api-imigrasi.sucofindo-arsip.my.id/intervensi/${id}`
+        `http://localhost:5000/intervensi/${id}`
       );
       console.log(response.data.idIdentitas);
       const newId = response.data.idIdentitas;
@@ -203,27 +206,49 @@ const FormRHK = () => {
                 onChange={(e) => setRhk(e.target.value)}
               >
                 <option value={null}>-- Pilih --</option>
-                <option value="Melakukan Peneraan. Perpanjangan Izin Tinggal dan Alih Status Keimigrasian Warga Negara Asing">
-                  Melakukan Peneraan. Perpanjangan Izin Tinggal dan Alih Status
-                  Keimigrasian Warga Negara Asing
-                </option>
-                <option value="Melakukan Pemeriksaan Keimigrasian terhadap Awak Alat Angkut di TPI">
-                  Melakukan Pemeriksaan Keimigrasian terhadap Awak Alat Angkut
-                  di TPI
-                </option>
-                <option value="Melakukan Pengambilan Biometrik dan Wawancara Pemohon DPRI">
-                  Melakukan Pengambilan Biometrik dan Wawancara Pemohon DPRI
-                </option>
-                <option value="Melakukan Pemetaan terkait Keberadaan dan Kegiatan Warga Negara Asing di Wilayah Kerja Kanim">
-                  Melakukan Pemetaan terkait Keberadaan dan Kegiatan Warga
-                  Negara Asing di Wilayah Kerja Kanim
-                </option>
-                <option value="Melakukan Pengelolaan Sumber Daya Manusia">
-                  Melakukan Pengelolaan Sumber Daya Manusia
-                </option>
-                <option value="Melakukan Pengelolaan Tata Usaha">
-                  Melakukan Pengelolaan Tata Usaha
-                </option>
+                {rhkIntervensi ===
+                "Melakukan Pemberian Dokumen Perjalanan Republik Indonesia (DPRI) kepada Pemohon yang telah lengkap sesuai Prosedur dan Peraturan yang berlaku" ? (
+                  <>
+                    <option
+                      value="Menyusun laporan berkaitan dengan pengambilan foto wajah pemohon Dokumen Perjalanan RI"
+                    >
+                      Menyusun laporan berkaitan dengan pengambilan foto wajah pemohon Dokumen Perjalanan RI
+                    </option>
+                    <option
+                      value="Menyusun laporan berkaitan terlaksananya pemindaian sidik jari"
+                    >
+                      Menyusun laporan berkaitan terlaksananya pemindaian sidik jari
+                    </option>
+                    <option value="Menyusun laporan hasil wawancara pemohon Dokumen Perjalanan RI">
+                      Menyusun laporan hasil wawancara pemohon Dokumen Perjalanan RI
+                    </option>
+                    <option value="Melakukan validasi biodata pemohon Dokumen Perjalanan Republik Indonesia">
+                      Melakukan validasi biodata pemohon Dokumen Perjalanan Republik Indonesia
+                    </option>
+                  </>
+                ) : rhkIntervensi === "melaksanakan pengelolaan administrasi" ? (
+                  <>
+                    <option
+                      value="Mengelola Sistem Informasi Surat Masuk dan
+Surat Keluar"
+                    >
+                      Mengelola Sistem Informasi Surat Masuk dan Surat Keluar
+                    </option>
+                    <option value="123">123</option>
+                  </>
+                ) : rhkIntervensi === "makan" ? (
+                  <>
+                    <option value="nasi">Nasi</option>
+                    <option value="mie">Mie</option>
+                    <option value="sayur">Sayur</option>
+                  </>
+                ) : rhkIntervensi === "minum" ? (
+                  <>
+                    <option value="air">Air</option>
+                    <option value="susu">Susu</option>
+                    <option value="jus">Jus</option>
+                  </>
+                ) : null}
               </select>
               <span className="focus-input100"></span>
             </div>
@@ -304,7 +329,7 @@ const FormRHK = () => {
                   <Modal.Title className="text-danger">Alert!</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  Tidak Dapat menambahkan data lebih dari 3
+                  Tidak Dapat menambahkan data lebih dari 4
                 </Modal.Body>
                 <Modal.Footer>
                   <Button variant="primary" onClick={moveToPrilakuKerja}>

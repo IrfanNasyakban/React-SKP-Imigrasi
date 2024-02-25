@@ -41,7 +41,7 @@ function ListAllData() {
 
   const getIdentitasById = async () => {
     try {
-      const response = await axios.get(`https://api-imigrasi.sucofindo-arsip.my.id/identitas/${id}`);
+      const response = await axios.get(`http://localhost:5000/identitas/${id}`);
       const {
         namaPegawai,
         nipPegawai,
@@ -137,8 +137,8 @@ function ListAllData() {
   const convertTableToExcel = () => {
     const ws = XLSX.utils.table_to_sheet(document.getElementById("table-id"));
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-    XLSX.writeFile(wb, "data.xlsx");
+    XLSX.utils.book_append_sheet(wb, ws, "Sheet1 (template)");
+    XLSX.writeFile(wb, "skp_fungsional.xlsx");
   };
 
   return (

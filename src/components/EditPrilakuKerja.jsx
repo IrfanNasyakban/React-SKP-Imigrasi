@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -20,7 +21,7 @@ const EditPrilakuKerja = () => {
     
       const getPrilakuKerjaById = async () => {
         const response = await axios.get(
-          `https://api-imigrasi.sucofindo-arsip.my.id/prilaku-kerja/${id}`
+          `http://localhost:5000/prilaku-kerja/${id}`
         );
         setIdIdentitas(response.data.idIdentitas);
         setBerorientasiPelayanan(response.data.berorientasiPelayanan);
@@ -50,7 +51,7 @@ const EditPrilakuKerja = () => {
         });
         try {
           await axios.patch(
-            `https://api-imigrasi.sucofindo-arsip.my.id/prilaku-kerja/${id}`,
+            `http://localhost:5000/prilaku-kerja/${id}`,
             jsonData,
             {
               headers: {

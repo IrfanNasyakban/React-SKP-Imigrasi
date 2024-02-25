@@ -10,7 +10,7 @@ const Dashboard = () => {
       <div className="container">
         <div className="row">
           <div className="col-lg-6 d-flex flex-column justify-content-center">
-            <h1 data-aos="fade-up">Pembuatan Surat SKP</h1>
+            <h1 data-aos="fade-up">Pembuatan SKP</h1>
             <h2 data-aos="fade-up" data-aos-delay="400">Isi data SKP dan export sebagai format excel</h2>
             <div data-aos="fade-up" data-aos-delay="600">
               <div className="text-center text-lg-start">

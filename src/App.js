@@ -21,6 +21,11 @@ import FormRHKStructure from './components/FormRhkStructure';
 import FormIndikatorKinerja from './components/FormIndikatorKinerja';
 import FormPrilakuKerjaStructure from './components/FormPrilakuKerjaStructure';
 import SearchDataStructure from './components/SearchDataStructure';
+import EditPageStructure from './components/EditPageStructure';
+import EditIdentitasStructure from './components/EditIdentitasStructure';
+import EditRHKStructure from './components/EditRHKStructure';
+import EditIndikatorKinerjaStructure from './components/EditIndikatorKinerjaStructure';
+import EditPrilakuKerjaStructure from './components/EditPrilakuKerjaStructure';
 
 function App() {
 
@@ -52,10 +57,24 @@ function App() {
             <Footer/>
           </>
         )} />
+        <Route path="/edit-structure/:id" element={(
+          <>
+            <Navbar/>
+            <EditPageStructure/>
+            <Footer/>
+          </>
+        )} />
         <Route path="/edit/identitas/:id" element={(
           <>
             <Navbar/>
             <EditIdentitas/>
+            <Footer/>
+          </>
+        )} />
+        <Route path="/edit/identitas-structure/:id" element={(
+          <>
+            <Navbar/>
+            <EditIdentitasStructure/>
             <Footer/>
           </>
         )} />
@@ -66,6 +85,13 @@ function App() {
             <Footer/>
           </>
         )} />
+        <Route path="/edit/rhk-structure/:id" element={(
+          <>
+            <Navbar/>
+            <EditRHKStructure/>
+            <Footer/>
+          </>
+        )} />
         <Route path="/edit/rhk/:id" element={(
           <>
             <Navbar/>
@@ -73,10 +99,24 @@ function App() {
             <Footer/>
           </>
         )} />
+        <Route path="/edit/indikator-kinerja-structure/:id" element={(
+          <>
+            <Navbar/>
+            <EditIndikatorKinerjaStructure/>
+            <Footer/>
+          </>
+        )} />
         <Route path="/edit/prilaku-kerja/:id" element={(
           <>
             <Navbar/>
             <EditPrilakuKerja/>
+            <Footer/>
+          </>
+        )} />
+        <Route path="/edit/prilaku-kerja-structure/:id" element={(
+          <>
+            <Navbar/>
+            <EditPrilakuKerjaStructure/>
             <Footer/>
           </>
         )} />
