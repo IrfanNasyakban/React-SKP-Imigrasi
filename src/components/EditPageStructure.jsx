@@ -33,7 +33,7 @@ const EditPageStructure = () => {
   const getIdentitasStructureById = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/identitas-structure/${id}`
+        `https://api-imigrasi.sucofindo-arsip.my.id/identitas-structure/${id}`
       );
       const {
         idIdentitasStructure,
@@ -68,7 +68,7 @@ const EditPageStructure = () => {
   const getRhkStructureByIdIdentitas = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/rhk-structure?idIdentitasStructure=${id}`
+        `https://api-imigrasi.sucofindo-arsip.my.id/rhk-structure?idIdentitasStructure=${id}`
       );
       setRhkStructureByIdIdentitas(response.data);
     } catch (error) {
@@ -79,7 +79,7 @@ const EditPageStructure = () => {
   const getIndikatorKinerjaByIdIdentitas = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/indikator-kinerja/identitas-structure/${id}`
+        `https://api-imigrasi.sucofindo-arsip.my.id/indikator-kinerja/identitas-structure/${id}`
       );
       setIndikatorKinerjaByIdIdentitas(response.data);
     } catch (error) {
@@ -90,7 +90,7 @@ const EditPageStructure = () => {
   const getPrilakuKerjaStructureByIdIdentitas = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/prilaku-kerja-structure?idIdentitasStructure=${id}`
+        `https://api-imigrasi.sucofindo-arsip.my.id/prilaku-kerja-structure?idIdentitasStructure=${id}`
       );
       setPrilakuKerjaStructureByIdIdentitas(response.data);
     } catch (error) {

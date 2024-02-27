@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/list.css";
 import axios from "axios";
 import * as XLSX from 'xlsx';
+import { Button } from "react-bootstrap";
 
 function ListAllData() {
   const [namaPegawai, setNamaPegawai] = useState("");
@@ -41,7 +42,7 @@ function ListAllData() {
 
   const getIdentitasById = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/identitas/${id}`);
+      const response = await axios.get(`https://api-imigrasi.sucofindo-arsip.my.id/identitas/${id}`);
       const {
         namaPegawai,
         nipPegawai,
@@ -144,7 +145,8 @@ function ListAllData() {
   return (
     <div className="pt-2 min-height-content">
       <div className="container">
-      <button onClick={convertTableToExcel}>Export to Excel</button>
+        <Button className="me-2" variant="success" onClick={convertTableToExcel}>Export to Excel</Button>
+        <a href="https://storage.googleapis.com/skp-imigrasi.appspot.com/template_skp_pegawai.xlsx" rel="noopener noreferrer" className="btn btn-primary" download>Download Template Excel</a>
         <div className="p-5 mt-5 rounded card section-padding custom-card">
           <div className="row">
             <div className="table-responsive text-center">
@@ -258,7 +260,7 @@ function ListAllData() {
                   </tr>
                         <tr>
                           <td className="table-bordered" rowSpan={3}>1</td>
-                          <td className="table-bordered" rowSpan={3} style={{ flex: 1, textAlign: "left" }}>{rhkIntervensi}</td>
+                          <td className="table-bordered" rowSpan={3} style={{ flex: 1, textAlign: "left" }}>{rhkIntervensi[0]}</td>
                           <td className="table-bordered" rowSpan={3} colSpan={3} style={{ flex: 1, textAlign: "left" }}>{rhk[0]}</td>
                           <td className="table-bordered">Kuantitas</td>
                           <td className="table-bordered" colSpan={2}>Jumlah pelaksanaan kegiatan dalam satu tahun</td>

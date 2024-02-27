@@ -39,7 +39,9 @@ const FormRHK = () => {
 
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/indikator-kinerja");
+        const response = await fetch(
+          "https://api-imigrasi.sucofindo-arsip.my.id/indikator-kinerja"
+        );
         const data = await response.json();
         setIndikatorKinerjaData(data); // Set data RHK ke dalam state rhkData
       } catch (error) {
@@ -52,7 +54,7 @@ const FormRHK = () => {
   const getRhkStructureById = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/rhk-structure/${id}`
+        `https://api-imigrasi.sucofindo-arsip.my.id/rhk-structure/${id}`
       );
       console.log(response.data.idRhkStructure);
       setIdRhkStructure(response.data.idRhkStructure);
@@ -83,11 +85,15 @@ const FormRHK = () => {
     });
 
     try {
-      await axios.post("http://localhost:5000/indikator-kinerja", jsonData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      await axios.post(
+        "https://api-imigrasi.sucofindo-arsip.my.id/indikator-kinerja",
+        jsonData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -115,7 +121,7 @@ const FormRHK = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/indikator-kinerja",
+        "https://api-imigrasi.sucofindo-arsip.my.id/indikator-kinerja",
         jsonData,
         {
           headers: {
@@ -139,7 +145,7 @@ const FormRHK = () => {
     e.preventDefault();
     try {
       const response = await axios.get(
-        `http://localhost:5000/rhk-structure/${id}`
+        `https://api-imigrasi.sucofindo-arsip.my.id/rhk-structure/${id}`
       );
       console.log(response.data.idIdentitasStructure);
       const newId = response.data.idIdentitasStructure;
@@ -213,7 +219,6 @@ Kepegawaian (SIMPEG)"
                     >
                       Mengelola Aplikasi Sistem Informasi Kepegawaian (SIMPEG)
                     </option>
-                    <option value="3">3</option>
                   </>
                 ) : rhk === "melaksanakan pengelolaan administrasi" ? (
                   <>
@@ -223,19 +228,51 @@ Surat Keluar"
                     >
                       Mengelola Sistem Informasi Surat Masuk dan Surat Keluar
                     </option>
-                    <option value="123">123</option>
                   </>
-                ) : rhk === "makan" ? (
+                ) : rhk === "Memonitoring penyusunan kinerja urusan Umum" ? (
                   <>
-                    <option value="nasi">Nasi</option>
-                    <option value="mie">Mie</option>
-                    <option value="sayur">Sayur</option>
+                    <option value="Menyusun Rencana/Kelender Kerja Urusan Umum di Lingkungan Kantor Imigrasi Kelas II TPI Lhokseumawe">
+                      Menyusun Rencana/Kelender Kerja Urusan Umum di Lingkungan
+                      Kantor Imigrasi Kelas II TPI Lhokseumawe
+                    </option>
                   </>
-                ) : rhk === "minum" ? (
+                ) : rhk ===
+                  "Memantau pengawasan terhadap kebersihan dan keamanan kantor" ? (
                   <>
-                    <option value="air">Air</option>
-                    <option value="susu">Susu</option>
-                    <option value="jus">Jus</option>
+                    <option value="Mengevaluasi Pengawasan terhadap Kebersihan dan Keamanan Kantor di Lingkungan Kantor Imigrasi Kelas II TPI Lhokseumawe">
+                      Mengevaluasi Pengawasan terhadap Kebersihan dan Keamanan
+                      Kantor di Lingkungan Kantor Imigrasi Kelas II TPI
+                      Lhokseumawe
+                    </option>
+                  </>
+                ) : rhk === "Memonitoring surat masuk/keluar di bagian Umum" ? (
+                  <>
+                    <option value="Mengevaluasi Tata Persuratan di Lingkungan Kantor Imigrasi Kelas II TPI Lhokseumawe">
+                      Mengevaluasi Tata Persuratan di Lingkungan Kantor Imigrasi
+                      Kelas II TPI Lhokseumawe
+                    </option>
+                  </>
+                ) : rhk === "Memonitoring laporan bulanan BMN" ? (
+                  <>
+                    <option value="Mengevaluasi Pengadministrasian/Penertiban terhadap Barang Milik Negara (BMN) dan terhadap Barang Persediaan di Lingkungan Kantor Imigrasi Kelas II TPI Lhokseumawe">
+                      Mengevaluasi Pengadministrasian/Penertiban terhadap Barang
+                      Milik Negara (BMN) dan terhadap Barang Persediaan di
+                      Lingkungan Kantor Imigrasi Kelas II TPI Lhokseumawe
+                    </option>
+                    <option value="Mengevaluasi Laporan Bulanan, Laporan Simak BMN dan Laporan Barang Persedian di Lingkungan Kantor Imigrasi Kelas II TPI Lhokseumawe">
+                      Mengevaluasi Laporan Bulanan, Laporan Simak BMN dan
+                      Laporan Barang Persedian di Lingkungan Kantor Imigrasi
+                      Kelas II TPI Lhokseumawe
+                    </option>
+                  </>
+                ) : rhk === "Pengawasan terhadap penilaian pegawai" ? (
+                  <>
+                    <option value="Mengevaluasi Waskat dan Memberikan penilaian Perilaku Score terhadap Kinerja Bawahan di Lingkungan Kantor Imigrasi Kela II TPI Lhokseumawe">
+                      Mengevaluasi Tata Persuratan di Lingkungan Kantor Imigrasi
+                      Mengevaluasi Waskat dan Memberikan penilaian Perilaku
+                      Score terhadap Kinerja Bawahan di Lingkungan Kantor
+                      Imigrasi Kela II TPI Lhokseumawe
+                    </option>
                   </>
                 ) : null}
               </select>
@@ -268,15 +305,24 @@ Surat Keluar"
               className="wrap-input100 validate-input"
               data-validate="Username is required"
             >
-              <input
+              <select
                 className="input100"
-                type="text"
                 id="perspektif"
                 name="perspektif"
                 value={perspektif}
                 onChange={(e) => setPerspektif(e.target.value)}
                 required
-              />
+              >
+                <option value="">Pilih Perspektif</option>
+                <option value="Penerima Layanan">Penerima Layanan</option>
+                <option value="Proses Bisnis">Proses Bisnis</option>
+                <option value="Penguatan Internal">Penguatan Internal</option>
+                <option value="Anggaran">Anggaran</option>
+                <option value="(Penerima Layanan/ Proses Bisnis/ Penguatan Internal/ Anggaran)">
+                  (Penerima Layanan/ Proses Bisnis/ Penguatan Internal/
+                  Anggaran)
+                </option>
+              </select>
               <span className="focus-input100"></span>
             </div>
 

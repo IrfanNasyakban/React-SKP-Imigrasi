@@ -20,7 +20,7 @@ const FormRHKIntervensi = () => {
   const getIdentitasById = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/identitas/${id}`
+        `https://api-imigrasi.sucofindo-arsip.my.id/identitas/${id}`
       );
       setIdIdentitas(response.data.idIdentitas);
     } catch (error) {
@@ -47,7 +47,7 @@ const FormRHKIntervensi = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/intervensi",
+        "https://api-imigrasi.sucofindo-arsip.my.id/intervensi",
         jsonData,
         {
           headers: {
@@ -114,7 +114,21 @@ const FormRHKIntervensi = () => {
               >
                 <option value={null}>-- Pilih --</option>
                 <option value="Melakukan Pemberian Dokumen Perjalanan Republik Indonesia (DPRI) kepada Pemohon yang telah lengkap sesuai Prosedur dan Peraturan yang berlaku">
-                  Melakukan Pemberian Dokumen Perjalanan Republik Indonesia (DPRI) kepada Pemohon yang telah Lengkap sesuai Prosedur dan Peraturan yang berlaku
+                  Melakukan Pemberian Dokumen Perjalanan Republik Indonesia
+                  (DPRI) kepada Pemohon yang telah Lengkap sesuai Prosedur dan
+                  Peraturan yang berlaku
+                </option>
+                <option value="Pengelolaan Informasi Keimigrasian">
+                  Pengelolaan Informasi Keimigrasian
+                </option>
+                <option value="Mengevaluasi Tata Persuratan pada urusan umum">
+                Mengevaluasi Tata Persuratan pada urusan umum
+                </option>
+                <option value="Mengevaluasi laporan bulanan terkait sarana dan prasarana kantor">
+                Mengevaluasi laporan bulanan terkait sarana dan prasarana kantor
+                </option>
+                <option value="Mengevaluasi ketersediaan barang persediaan">
+                Mengevaluasi ketersediaan barang persediaan
                 </option>
               </select>
               <span className="focus-input100"></span>

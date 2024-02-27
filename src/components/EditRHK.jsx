@@ -22,12 +22,12 @@ const EditRHK = () => {
   });
 
   const getRhkIntervensiById = async () => {
-    const response = await axios.get(`http://localhost:5000/intervensi/${idIntervensi}`);
+    const response = await axios.get(`https://api-imigrasi.sucofindo-arsip.my.id/intervensi/${idIntervensi}`);
     setRhkIntervensi(response.data.rhkIntervensi);
   };
 
   const getRhkById = async () => {
-    const response = await axios.get(`http://localhost:5000/rhk/${id}`);
+    const response = await axios.get(`https://api-imigrasi.sucofindo-arsip.my.id/rhk/${id}`);
     setIdIntervensi(response.data.idIntervensi);
     setRhk(response.data.rhk);
     setKuantitas(response.data.kuantitas);
@@ -49,7 +49,7 @@ const EditRHK = () => {
       jsonData[key] = value;
     });
     try {
-      await axios.patch(`http://localhost:5000/rhk/${id}`, jsonData, {
+      await axios.patch(`https://api-imigrasi.sucofindo-arsip.my.id/rhk/${id}`, jsonData, {
         headers: {
           "Content-Type": "application/json",
         },

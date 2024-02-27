@@ -32,7 +32,7 @@ const EditPage = () => {
   const getIdentitasById = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/identitas/${id}`
+        `https://api-imigrasi.sucofindo-arsip.my.id/identitas/${id}`
       );
       const {
         idIdentitas,
@@ -67,7 +67,7 @@ const EditPage = () => {
   const getIntervensiByIdIdentitas = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/intervensi?idIdentitas=${id}`
+        `https://api-imigrasi.sucofindo-arsip.my.id/intervensi?idIdentitas=${id}`
       );
       setIntervensiByIdIdentitas(response.data);
     } catch (error) {
@@ -78,7 +78,7 @@ const EditPage = () => {
   const getRhkByIdIdentitas = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/rhk/identitas/${id}`
+        `https://api-imigrasi.sucofindo-arsip.my.id/rhk/identitas/${id}`
       );
       setRhkByIdIdentitas(response.data);
     } catch (error) {
@@ -89,7 +89,7 @@ const EditPage = () => {
   const getPrilakuKerjaByIdIdentitas = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/prilaku-kerja?idIdentitas=${id}`
+        `https://api-imigrasi.sucofindo-arsip.my.id/prilaku-kerja?idIdentitas=${id}`
       );
       setPrilakuKerjaByIdIdentitas(response.data);
     } catch (error) {

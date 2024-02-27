@@ -35,7 +35,7 @@ const SearchData = () => {
       if (searchNama.trim() !== "") {
         // Pastikan input nama tidak kosong
         const response = await axios.get(
-          `http://localhost:5000/identitas?search_query=${searchNama}`
+          `https://api-imigrasi.sucofindo-arsip.my.id/identitas?search_query=${searchNama}`
         );
         if (response.data.length > 0) {
           const data = response.data; // Mengambil semua objek dari array respons

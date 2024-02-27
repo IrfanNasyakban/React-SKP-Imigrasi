@@ -17,7 +17,7 @@ const EditIndikatorKinerjaStructure = () => {
 
   const getRhkStructureById = async () => {
     const response = await axios.get(
-      `http://localhost:5000/indikator-kinerja/${id}`
+      `https://api-imigrasi.sucofindo-arsip.my.id/indikator-kinerja/${id}`
     );
     setIdRhkStructure(response.data.idRhkStructure);
     setIndikatorKinerja(response.data.indikatorKinerja);
@@ -40,7 +40,7 @@ const updateIndikatorKinerja = async (e) => {
     });
     try {
       await axios.patch(
-        `http://localhost:5000/indikator-kinerja/${id}`,
+        `https://api-imigrasi.sucofindo-arsip.my.id/indikator-kinerja/${id}`,
         jsonData,
         {
           headers: {

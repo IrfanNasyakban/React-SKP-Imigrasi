@@ -4,13 +4,13 @@ import axios from "axios";
 
 const FormPrilakuKerja = () => {
   const [idIdentitas, setIdIdentitas] = useState();
-  const [berorientasiPelayanan, setBerorientasiPelayanan] = useState();
-  const [akuntabel, setAkuntabel] = useState();
-  const [kompeten, setKompeten] = useState();
-  const [harmonis, setHarmonis] = useState();
-  const [loyal, setLoyal] = useState();
-  const [adaptif, setAdaptif] = useState();
-  const [kolaboratif, setKolaboratif] = useState();
+  const [berorientasiPelayanan, setBerorientasiPelayanan] = useState("-");
+  const [akuntabel, setAkuntabel] = useState("-");
+  const [kompeten, setKompeten] = useState("-");
+  const [harmonis, setHarmonis] = useState("-");
+  const [loyal, setLoyal] = useState("-");
+  const [adaptif, setAdaptif] = useState("-");
+  const [kolaboratif, setKolaboratif] = useState("-");
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const FormPrilakuKerja = () => {
   const getIdentitasById = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/identitas/${id}`
+        `https://api-imigrasi.sucofindo-arsip.my.id/identitas/${id}`
       );
       console.log(response.data.idIdentitas);
       setIdIdentitas(response.data.idIdentitas);
@@ -35,7 +35,7 @@ const FormPrilakuKerja = () => {
   const getPrilakuKerjaById = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/prilaku-kerja/${id}`
+        `https://api-imigrasi.sucofindo-arsip.my.id/prilaku-kerja/${id}`
       );
       setIdIdentitas(response.data.idIdentitas);
     } catch (error) {
@@ -74,7 +74,7 @@ const FormPrilakuKerja = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/prilaku-kerja",
+        "https://api-imigrasi.sucofindo-arsip.my.id/prilaku-kerja",
         jsonData,
         {
           headers: {
@@ -82,7 +82,7 @@ const FormPrilakuKerja = () => {
           },
         }
       );
-      navigate("/search");
+      navigate(`/list/${idIdentitas}`);
     } catch (error) {
       console.log(error);
     }

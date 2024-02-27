@@ -21,7 +21,7 @@ const EditPrilakuKerja = () => {
     
       const getPrilakuKerjaById = async () => {
         const response = await axios.get(
-          `http://localhost:5000/prilaku-kerja/${id}`
+          `https://api-imigrasi.sucofindo-arsip.my.id/prilaku-kerja/${id}`
         );
         setIdIdentitas(response.data.idIdentitas);
         setBerorientasiPelayanan(response.data.berorientasiPelayanan);
@@ -51,7 +51,7 @@ const EditPrilakuKerja = () => {
         });
         try {
           await axios.patch(
-            `http://localhost:5000/prilaku-kerja/${id}`,
+            `https://api-imigrasi.sucofindo-arsip.my.id/prilaku-kerja/${id}`,
             jsonData,
             {
               headers: {

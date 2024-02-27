@@ -24,7 +24,7 @@ const FormRHK = () => {
 
   const handleNextButtonClick = () => {
     if (
-      rhkData.filter((item) => item.idIntervensi === idIntervensi).length >= 4
+      rhkData.filter((item) => item.idIntervensi === idIntervensi).length >= 3
     ) {
       setShowModal(true);
     } else {
@@ -39,7 +39,7 @@ const FormRHK = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/rhk"
+          "https://api-imigrasi.sucofindo-arsip.my.id/rhk"
         );
         const data = await response.json();
         setRhkData(data); // Set data RHK ke dalam state rhkData
@@ -53,7 +53,7 @@ const FormRHK = () => {
   const getIntervensiById = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/intervensi/${id}`
+        `https://api-imigrasi.sucofindo-arsip.my.id/intervensi/${id}`
       );
       console.log(response.data.idIntervensi);
       setidIntervensi(response.data.idIntervensi);
@@ -88,7 +88,7 @@ const FormRHK = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/rhk",
+        "https://api-imigrasi.sucofindo-arsip.my.id/rhk",
         jsonData,
         {
           headers: {
@@ -126,7 +126,7 @@ const FormRHK = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/rhk",
+        "https://api-imigrasi.sucofindo-arsip.my.id/rhk",
         jsonData,
         {
           headers: {
@@ -134,6 +134,7 @@ const FormRHK = () => {
           },
         }
       );
+      console.log(response);
       const newId = response.data.idIdentitas;
       console.log("New ID:", newId);
       if (newId) {
@@ -150,7 +151,7 @@ const FormRHK = () => {
     e.preventDefault();
     try {
       const response = await axios.get(
-        `http://localhost:5000/intervensi/${id}`
+        `https://api-imigrasi.sucofindo-arsip.my.id/intervensi/${id}`
       );
       console.log(response.data.idIdentitas);
       const newId = response.data.idIdentitas;
@@ -209,24 +210,25 @@ const FormRHK = () => {
                 {rhkIntervensi ===
                 "Melakukan Pemberian Dokumen Perjalanan Republik Indonesia (DPRI) kepada Pemohon yang telah lengkap sesuai Prosedur dan Peraturan yang berlaku" ? (
                   <>
-                    <option
-                      value="Menyusun laporan berkaitan dengan pengambilan foto wajah pemohon Dokumen Perjalanan RI"
-                    >
-                      Menyusun laporan berkaitan dengan pengambilan foto wajah pemohon Dokumen Perjalanan RI
+                    <option value="Menyusun laporan berkaitan dengan pengambilan foto wajah pemohon Dokumen Perjalanan RI">
+                      Menyusun laporan berkaitan dengan pengambilan foto wajah
+                      pemohon Dokumen Perjalanan RI
                     </option>
-                    <option
-                      value="Menyusun laporan berkaitan terlaksananya pemindaian sidik jari"
-                    >
-                      Menyusun laporan berkaitan terlaksananya pemindaian sidik jari
+                    <option value="Menyusun laporan berkaitan terlaksananya pemindaian sidik jari">
+                      Menyusun laporan berkaitan terlaksananya pemindaian sidik
+                      jari
                     </option>
                     <option value="Menyusun laporan hasil wawancara pemohon Dokumen Perjalanan RI">
-                      Menyusun laporan hasil wawancara pemohon Dokumen Perjalanan RI
+                      Menyusun laporan hasil wawancara pemohon Dokumen
+                      Perjalanan RI
                     </option>
                     <option value="Melakukan validasi biodata pemohon Dokumen Perjalanan Republik Indonesia">
-                      Melakukan validasi biodata pemohon Dokumen Perjalanan Republik Indonesia
+                      Melakukan validasi biodata pemohon Dokumen Perjalanan
+                      Republik Indonesia
                     </option>
                   </>
-                ) : rhkIntervensi === "melaksanakan pengelolaan administrasi" ? (
+                ) : rhkIntervensi ===
+                  "melaksanakan pengelolaan administrasi" ? (
                   <>
                     <option
                       value="Mengelola Sistem Informasi Surat Masuk dan
@@ -236,17 +238,45 @@ Surat Keluar"
                     </option>
                     <option value="123">123</option>
                   </>
-                ) : rhkIntervensi === "makan" ? (
+                ) : rhkIntervensi === "Pengelolaan Informasi Keimigrasian" ? (
                   <>
-                    <option value="nasi">Nasi</option>
-                    <option value="mie">Mie</option>
-                    <option value="sayur">Sayur</option>
+                    <option value="Menyiapkan dan Menyusun Bahan Penyebaran dan Pemanfaatan Informasi Keimigrasian">
+                      Menyiapkan dan Menyusun Bahan Penyebaran dan Pemanfaatan
+                      Informasi Keimigrasian
+                    </option>
+                    <option value="Melakukan pemilahan data WNI dan WNA">
+                      Melakukan pemilahan data WNI dan WNA
+                    </option>
+                    <option value="Melakukan pemeriksaan koneksi jaringan komunikasi keimigrasian">
+                      Melakukan pemeriksaan koneksi jaringan komunikasi
+                      keimigrasian
+                    </option>
                   </>
-                ) : rhkIntervensi === "minum" ? (
+                ) : rhkIntervensi ===
+                  "Mengevaluasi Tata Persuratan pada urusan umum" ? (
                   <>
-                    <option value="air">Air</option>
-                    <option value="susu">Susu</option>
-                    <option value="jus">Jus</option>
+                    <option value="Melakukan agenda surat masuk dan surat keluar">
+                      Melakukan agenda surat masuk dan surat keluar
+                    </option>
+                  </>
+                ) : rhkIntervensi ===
+                  "Mengevaluasi laporan bulanan terkait sarana dan prasarana kantor" ? (
+                  <>
+                    <option value="Membantu menyusun Laporan bulanan terkait Sarana dan Prasana Kantor">
+                      Membantu menyusun Laporan bulanan terkait Sarana dan
+                      Prasana Kantor
+                    </option>
+                    <option value="Mengawasi ketersedian sarana dan prasarana serta mengontrol kebersihan Prasaran Kantor">
+                      Mengawasi ketersedian sarana dan prasarana serta
+                      mengontrol kebersihan Prasaran Kantor
+                    </option>
+                  </>
+                ) : rhkIntervensi ===
+                  "Mengevaluasi ketersediaan barang persediaan" ? (
+                  <>
+                    <option value="Membantu Mencatat ketersedian Barang Persediaan dan mendistribusikan ke seksi lain sesuai kebutuhan">
+                    Membantu Mencatat ketersedian Barang Persediaan dan mendistribusikan ke seksi lain sesuai kebutuhan
+                    </option>
                   </>
                 ) : null}
               </select>

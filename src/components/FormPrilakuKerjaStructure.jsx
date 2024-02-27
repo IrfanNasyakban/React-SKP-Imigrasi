@@ -4,13 +4,13 @@ import axios from "axios";
 
 const FormPrilakuKerjaStructure = () => {
   const [idIdentitasStructure, setIdIdentitasStructure] = useState();
-  const [berorientasiPelayanan, setBerorientasiPelayanan] = useState();
-  const [akuntabel, setAkuntabel] = useState();
-  const [kompeten, setKompeten] = useState();
-  const [harmonis, setHarmonis] = useState();
-  const [loyal, setLoyal] = useState();
-  const [adaptif, setAdaptif] = useState();
-  const [kolaboratif, setKolaboratif] = useState();
+  const [berorientasiPelayanan, setBerorientasiPelayanan] = useState("-");
+  const [akuntabel, setAkuntabel] = useState("-");
+  const [kompeten, setKompeten] = useState("-");
+  const [harmonis, setHarmonis] = useState("-");
+  const [loyal, setLoyal] = useState("-");
+  const [adaptif, setAdaptif] = useState("-");
+  const [kolaboratif, setKolaboratif] = useState("-");
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const FormPrilakuKerjaStructure = () => {
   const getIdentitasStructureById = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/identitas-structure/${id}`
+        `https://api-imigrasi.sucofindo-arsip.my.id/identitas-structure/${id}`
       );
       console.log(response.data.idIdentitasStructure);
       setIdIdentitasStructure(response.data.idIdentitasStructure);
@@ -35,7 +35,7 @@ const FormPrilakuKerjaStructure = () => {
   const getPrilakuKerjaStructureById = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/prilaku-kerja-structure/${id}`
+        `https://api-imigrasi.sucofindo-arsip.my.id/prilaku-kerja-structure/${id}`
       );
       setIdIdentitasStructure(response.data.idIdentitasStructure);
     } catch (error) {
@@ -74,7 +74,7 @@ const FormPrilakuKerjaStructure = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/prilaku-kerja-structure",
+        "https://api-imigrasi.sucofindo-arsip.my.id/prilaku-kerja-structure",
         jsonData,
         {
           headers: {
@@ -82,7 +82,7 @@ const FormPrilakuKerjaStructure = () => {
           },
         }
       );
-      navigate("/search-structure");
+      navigate(`/list-structure/${idIdentitasStructure}`);
     } catch (error) {
       console.log(error);
     }

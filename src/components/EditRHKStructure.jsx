@@ -15,7 +15,7 @@ const EditRHKStructure = () => {
 
   const getRhkStructureById = async () => {
     const response = await axios.get(
-      `http://localhost:5000/rhk-structure/${id}`
+      `https://api-imigrasi.sucofindo-arsip.my.id/rhk-structure/${id}`
     );
     setIdIdentitasStructure(response.data.idIdentitasStructure);
     setRhk(response.data.rhk);
@@ -33,7 +33,7 @@ const EditRHKStructure = () => {
     });
     try {
       await axios.patch(
-        `http://localhost:5000/rhk-structure/${id}`,
+        `https://api-imigrasi.sucofindo-arsip.my.id/rhk-structure/${id}`,
         jsonData,
         {
           headers: {

@@ -20,7 +20,7 @@ const FormRHKStructure = () => {
   const getIdentitasById = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/identitas-structure/${id}`
+        `https://api-imigrasi.sucofindo-arsip.my.id/identitas-structure/${id}`
       );
       setIdIdentitasStructure(response.data.idIdentitasStructure);
     } catch (error) {
@@ -47,7 +47,7 @@ const FormRHKStructure = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/rhk-structure",
+        "https://api-imigrasi.sucofindo-arsip.my.id/rhk-structure",
         jsonData,
         {
           headers: {
@@ -115,6 +115,21 @@ const FormRHKStructure = () => {
                 <option value={null}>-- Pilih --</option>
                 <option value="Melakukan Pengelolaan Sumber Daya Manusia dan Tata Usaha">
                   Melakukan Pengelolaan Sumber Daya Manusia dan Tata Usaha
+                </option>
+                <option value="Memonitoring penyusunan kinerja urusan Umum">
+                Memonitoring penyusunan kinerja urusan Umum
+                </option>
+                <option value="Memonitoring surat masuk/keluar di bagian Umum">
+                Memonitoring surat masuk/keluar di bagian Umum
+                </option>
+                <option value="Memantau pengawasan terhadap kebersihan dan keamanan kantor">
+                Memantau pengawasan terhadap kebersihan dan keamanan kantor
+                </option>
+                <option value="Memonitoring laporan bulanan BMN">
+                Memonitoring laporan bulanan BMN
+                </option>
+                <option value="Pengawasan terhadap penilaian pegawai">
+                Pengawasan terhadap penilaian pegawai
                 </option>
               </select>
               <span className="focus-input100"></span>

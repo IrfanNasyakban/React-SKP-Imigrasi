@@ -23,7 +23,7 @@ const EditIdentitasStructure = () => {
 
   const getIdentitasStructureById = async () => {
     const response = await axios.get(
-      `http://localhost:5000/identitas-structure/${id}`
+      `https://api-imigrasi.sucofindo-arsip.my.id/identitas-structure/${id}`
     );
     setNamaPegawai(response.data.namaPegawai);
     setNipPegawai(response.data.nipPegawai);
@@ -57,7 +57,7 @@ const EditIdentitasStructure = () => {
     });
     try {
       await axios.patch(
-        `http://localhost:5000/identitas-structure/${id}`,
+        `https://api-imigrasi.sucofindo-arsip.my.id/identitas-structure/${id}`,
         jsonData,
         {
           headers: {

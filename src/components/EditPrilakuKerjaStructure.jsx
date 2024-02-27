@@ -21,7 +21,7 @@ const EditPrilakuKerjaStructure = () => {
     
       const getPrilakuKerjaStructureById = async () => {
         const response = await axios.get(
-          `http://localhost:5000/prilaku-kerja-structure/${id}`
+          `https://api-imigrasi.sucofindo-arsip.my.id/prilaku-kerja-structure/${id}`
         );
         setIdIdentitasStructure(response.data.idIdentitasStructure);
         setBerorientasiPelayanan(response.data.berorientasiPelayanan);
@@ -51,7 +51,7 @@ const EditPrilakuKerjaStructure = () => {
         });
         try {
           await axios.patch(
-            `http://localhost:5000/prilaku-kerja-structure/${id}`,
+            `https://api-imigrasi.sucofindo-arsip.my.id/prilaku-kerja-structure/${id}`,
             jsonData,
             {
               headers: {

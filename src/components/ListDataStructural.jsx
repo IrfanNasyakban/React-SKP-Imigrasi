@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/list.css";
 import axios from "axios";
@@ -40,7 +41,7 @@ function ListDataStructural() {
 
   const getIdentitasStructureById = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/identitas-structure/${id}`);
+      const response = await axios.get(`https://api-imigrasi.sucofindo-arsip.my.id/identitas-structure/${id}`);
       const {
         namaPegawai,
         nipPegawai,
@@ -140,7 +141,8 @@ function ListDataStructural() {
   return (
     <div className="pt-2 min-height-content">
       <div className="container">
-      <button onClick={convertTableToExcel}>Export to Excel</button>
+      <Button className="me-2" variant="success" onClick={convertTableToExcel}>Export to Excel</Button>
+        <a href="https://storage.googleapis.com/skp-imigrasi.appspot.com/template_skp_pegawai.xlsx" rel="noopener noreferrer" className="btn btn-primary" download>Download Template Excel</a>
         <div className="p-5 mt-5 rounded card section-padding custom-card">
           <div className="row">
             <div className="table-responsive text-center">

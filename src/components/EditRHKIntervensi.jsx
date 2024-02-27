@@ -15,7 +15,7 @@ const EditRHKIntervensi = () => {
 
   const getRhkIntervensiById = async () => {
     const response = await axios.get(
-      `http://localhost:5000/intervensi/${id}`
+      `https://api-imigrasi.sucofindo-arsip.my.id/intervensi/${id}`
     );
     setIdIdentitas(response.data.idIdentitas);
     setRhkIntervensi(response.data.rhkIntervensi);
@@ -33,7 +33,7 @@ const EditRHKIntervensi = () => {
     });
     try {
       await axios.patch(
-        `http://localhost:5000/intervensi/${id}`,
+        `https://api-imigrasi.sucofindo-arsip.my.id/intervensi/${id}`,
         jsonData,
         {
           headers: {
