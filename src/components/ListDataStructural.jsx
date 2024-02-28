@@ -142,7 +142,7 @@ function ListDataStructural() {
     <div className="pt-2 min-height-content">
       <div className="container">
       <Button className="me-2" variant="success" onClick={convertTableToExcel}>Export to Excel</Button>
-        <a href="https://storage.googleapis.com/skp-imigrasi.appspot.com/template_skp_pegawai.xlsx" rel="noopener noreferrer" className="btn btn-primary" download>Download Template Excel</a>
+        <a href="https://storage.googleapis.com/skp-imigrasi.appspot.com/template%20skp%20pegawai%20struktur.xlsx" rel="noopener noreferrer" className="btn btn-primary" download>Download Template Excel</a>
         <div className="p-5 mt-5 rounded card section-padding custom-card">
           <div className="row">
             <div className="table-responsive text-center">
