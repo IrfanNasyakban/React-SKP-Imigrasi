@@ -1,3 +1,46 @@
+# Pembuatan Sasaran Kinerja Pegawai (SKP)
+
+## <a name="introduction"></a> Introduction :
+Aplikasi ini dibuat untuk mempermudah para pegawai yang ada di kantor Imigrasi Kelas II TPI Lhokseumawe untuk membuat Sasaran Kinerja Pegawai (SKP) Tahunan
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Features](#features)
+- [Libraries](#libraries)
+- [Project Structure](#project-structures)
+- [APK Link](#apk-link)
+
+## <a name="features"></a> Features :
+You may list what feature you created, example :
+- Buat SKP bagi Pegawai Umum
+- Cari Data SKP bagi Pegawai Umum
+- Edit Data SKP bagi Pegawai Umum
+- Buat SKP bagi Pegawai Struktural
+- Cari Data SKP bagi Pegawai Struktural
+- Edit Data SKP bagi Pegawai Struktural
+- Export Data to Excel
+- Download Template Excel
+
+## <a name="libraries"></a> Libraries :
+- ExpressJS
+- Sequelize
+- Mysql2
+- Cors
+- ReactJS
+- Bootstrap
+
+## <a name="project-structures"></a> Project Structure :
+* `assets`
+* `components`
+* `resources`
+* `styles`
+
+## <a name="apk-link"></a> Website URL :
+[Demo Video Story App](https://youtu.be/yEmZDY9ThUA?si=4VfPajbaU7dMByoA)
+
+<hr>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
